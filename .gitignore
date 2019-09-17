@@ -375,3 +375,4 @@ vignettes/*.pdf
 # End of https://www.gitignore.io/api/r,latex,macos,matlab
 
 /GradingReproducibilityRS.pdf
+/Text/GradingReproducibilityRS.pdf
