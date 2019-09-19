@@ -1,0 +1,29 @@
+\begin{tikzpicture}[node distance=1.3cm,scale=.5]
+
+\node (data) [root] {Data};
+\node (figures) [root, below of=data] {Figures};
+\node (images) [root, below of=figures] {Images};
+%
+\node (code) [root, below of=images] {Code};
+\node (R) [root, below right of=code, xshift=1cm, yshift=-.5cm] {R};
+\node (C) [root, below of=R] {C};
+\node (Matlab) [root, below of=C] {Matlab};
+%
+\node (text) [root, below of=code, yshift=-4cm] {Text};
+\node (common) [root, below right of=text, xshift=1cm, yshift=-.5cm] {Common};
+\node (biblio) [files, below right of=common] {.bib};
+\node (reports) [root, below of=common, yshift=-1cm] {Reports};
+\node (articles) [root, below of=reports] {Articles};
+%
+\draw [link] (data) -- (figures);
+\draw [link] (figures) -- (images);
+\draw [link] (images) -- (code);
+	\draw [link] (code) |- (R);
+	\draw [link] (code) |- (C);
+	\draw [link] (code) |- (Matlab);
+\draw [link] (code) -- (text);
+	\draw [link] (text) |- (common);
+		\draw [link] (common) |- (biblio);
+	\draw [link] (text) |- (reports);
+	\draw [link] (text) |- (articles);
+\end{tikzpicture}

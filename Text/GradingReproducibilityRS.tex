@@ -12,101 +12,65 @@
 \usepackage{array}
 \usepackage[caption=false,font=footnotesize]{subfig}
 \usepackage{dblfloatfix}
-\usepackage[nomarkers]{endfloat}
+%\usepackage[nomarkers]{endfloat}
 \usepackage{url}
 \usepackage{booktabs}
 
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric,arrows,trees}
+
+
+\tikzstyle{root} = [rectangle, rounded corners, minimum width=2cm, minimum height=.7cm, text centered, draw=black, fill=blue!30]
+\tikzstyle{files} = [rectangle, minimum width=1cm, minimum height=.5cm, text centered, draw=black, fill=white]
+\tikzstyle{link} = [thick, -]
+
 \begin{document}
 	
-	\title{Grading Reproducibility in Remote Sensing Articles}
-	%
-	%
-	% author names and IEEE memberships
-	% note positions of commas and nonbreaking spaces ( ~ ) LaTeX will not break
-	% a structure at a ~ so this keeps an author's name from being broken across
-	% two lines.
-	% use \thanks{} to gain access to the first footnote area
-	% a separate \thanks must be used for each paragraph as LaTeX2e's \thanks
-	% was not built to handle multiple paragraphs
-	%
+\title{Grading Reproducibility in Remote Sensing Articles}
 	
-	\author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
-		Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
-		and~Qi~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
-		\thanks{A.\ C.\ Frery is with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil (email: acfrery@laccan.ufal.br)}% <-this % stops a space
-		\thanks{Luis Gomez is with the Universidad de Las Palmas de Gran Canaria, Spain}% <-this % stops a space
-		\thanks{Qi Wang is with the Northwestern Polytechnical University, China}% <-this % stops a space
-		\thanks{Manuscript received XX, accepted YY.}}
+\author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
+Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
+and~Qi~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
+\thanks{A.\ C.\ Frery is with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil (email: acfrery@laccan.ufal.br)}% <-this % stops a space
+\thanks{Luis Gomez is with the Universidad de Las Palmas de Gran Canaria, Spain}% <-this % stops a space
+\thanks{Qi Wang is with the Northwestern Polytechnical University, China}% <-this % stops a space
+\thanks{Manuscript received XX, accepted YY.}}
 	
-	% note the % following the last \IEEEmembership and also \thanks - 
-	% these prevent an unwanted space from occurring between the last author name
-	% and the end of the author line. i.e., if you had this:
-	% 
-	% \author{....lastname \thanks{...} \thanks{...} }
-	%                     ^------------^------------^----Do not want these spaces!
-	%
-	% a space would be appended to the last name and could cause every name on that
-	% line to be shifted left slightly. This is one of those "LaTeX things". For
-	% instance, "\textbf{A} \textbf{B}" will typeset as "A B" not "AB". To get
-	% "AB" then you have to do: "\textbf{A}\textbf{B}"
-	% \thanks is no different in this regard, so shield the last } of each \thanks
-	% that ends a line with a % and do not let a space in before the next \thanks.
-	% Spaces after \IEEEmembership other than the last one are OK (and needed) as
-	% you are supposed to have spaces between the names. For what it is worth,
-	% this is a minor point as most people would not even notice if the said evil
-	% space somehow managed to creep in.
+\markboth{IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing,~Vol.~XX, No.~YY, Month~2020}%
+{Frery \MakeLowercase{\textit{et al.}}: Grading Reproducibility}
 	
+\maketitle
 	
+\begin{abstract}
+The abstract goes here.
+\end{abstract}
 	
-	% The paper headers
-	\markboth{IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing,~Vol.~XX, No.~YY, Month~2020}%
-	{Frery \MakeLowercase{\textit{et al.}}: Grading Reproducibility}
+\begin{IEEEkeywords}
+Reproducibility,
+Replicability,
+Remote Sensing
+\end{IEEEkeywords}
 	
-	\maketitle
+
+\IEEEpeerreviewmaketitle
+
+\section{Introduction}
 	
-	\begin{abstract}
-		The abstract goes here.
-	\end{abstract}
+\IEEEPARstart{R}{eproducibility} is at the core of experimental sciences. 
+It is also a basilar element of scientific integrity. 
+The advent of data science is leading to new requirements and practices able to cope with the challenges posed by huge volumes of data, often of dynamic nature. 
 	
-	% Note that keywords are not normally used for peerreview papers.
-	\begin{IEEEkeywords}
-		IEEE, IEEEtran, journal, \LaTeX, paper, template.
-	\end{IEEEkeywords}
+Modern grounds for Reproducible Research were set before the widespread use of deep learning and other massively data-based techniques. 
 	
+Among the efforts made towards building Remote Sensing Reproducible Research environments, one may mention Code Ocean and GRSS Remote Sensing Code Library. 
+These two initiatives belong to the IEEE scientific ecosystem. 
 	
-	
-	
-	
-	
-	% For peer review papers, you can put extra information on the cover
-	% page as needed:
-	% \ifCLASSOPTIONpeerreview
-	% \begin{center} \bfseries EDICS Category: 3-BBND \end{center}
-	% \fi
-	%
-	% For peerreview papers, this IEEEtran command inserts a page break and
-	% creates the second title. It will be ignored for other modes.
-	\IEEEpeerreviewmaketitle
-	
-	
-	
-	\section{Introduction}
-	
-	\IEEEPARstart{R}{eproducibility} is at the core of experimental sciences. 
-	It is also a basilar element of scientific integrity. 
-	The advent of data science is leading to new requirements and practices able to cope with the challenges posed by huge volumes of data, often of dynamic nature. 
-	
-	Modern grounds for Reproducible Research were set before the widespread use of deep learning and other massively data-based techniques. 
-	
-	Among the efforts made towards building Remote Sensing Reproducible Research environments, one may mention Code Ocean and GRSS Remote Sensing Code Library. 
-	These two initiatives belong to the IEEE scientific ecosystem. 
-	
-	However, is this enough for healthy science in Remote Sensing? 
-	We do not think so. 
-	Many authors continuously strive to disseminate their research findings in such a way that any user will be able to validate them at a later stage. 
-	This includes the proposal of software architectures, the use of open data, FLOSS (Free/Libre Open Source Software), and other initiatives.
+However, is this enough for healthy science in Remote Sensing? 
+We do not think so. 
+Many authors continuously strive to disseminate their research findings in such a way that any user will be able to validate them at a later stage. 
+This includes the proposal of software architectures, the use of open data, FLOSS (Free/Libre Open Source Software), and other initiatives.
 		
-	Universally accessible and informative web page containing:
+Universally accessible and informative web page containing:
 	\begin{enumerate}
 		\item\label{item:ProjectID} Project identification (one project may host more than one paper; one paper may be hosted by more than one project)
 		\begin{enumerate}
@@ -145,47 +109,64 @@
 			& \\ \bottomrule
 		\end{tabular}
 	\end{table*}
+
+\section{How to Start Writing a Reproducible Article}
+
+Starting well saves lots of time.
+Here we make simple recommendations that may save time and efforts.
+We assume that you use \LaTeX\ and \BibTeX.
+
+The main idea consists in having a single repository for all the scientific texts you write: 
+theses, 
+reports, 
+articles, 
+letters,
+reviews,
+and miscellaneous documents.
+
+Fig.~\ref{Fig:StructRepo} illustrates the recommended basic structure for a repository holding several \LaTeX\ files (or projects), along with their associated data and code.
+
+Every directory may contain specific subdirectories.
+For instance, \verb|Data| may contain \verb|CSV|, \verb|text|, and other directories with specific data files.
+
+Notice that there is a single \BibTeX\ file (with extension \verb|.bib| in the \verb|Common| directory).
+\BibTeX\ references can be split on several files, but these files should be common to all projects.
+This avoids outdated and redundant bibliographic data bases.
+
+Every article should be in its pwn directory.
+Avoid using the name of the journal where you will submit your work for the directory and document names, as the destination may change along the process.
+
+Data, figures, images and code should be common to all projects, as one typically reuses them.
+
+Check Ref.~\cite{EditorialGRSL2015} for naming convention and revision handling of submitted manuscripts.
+
+\begin{figure}[hbt]
+\centering
+\input{../Figures/tikz/RepoStructure}
+\caption{Recommended structure of a repository for scientific texts}\label{Fig:StructRepo}
+\end{figure}
 	
+\section{Conclusion}
+The conclusion goes here.
 	
-	\section{Conclusion}
-	The conclusion goes here.
+\section*{Acknowledgments}
+The authors would like to thank...
 	
+\nocite{StatisticalAnalysesReproducibleResearch,%
+RRComputationalHarmonicAnalysis,%
+RREconometrics,%
+RRSignalProcessing,%
+AddressingNeedDataCodeSharingComputationalScience,%
+ReproducibleResearchinComputationalScience,%
+TenRulesReproducibleComputationalResearch,%
+ManifestoReproducibleScience}
 	
+\bibliographystyle{IEEEtran}
+\bibliography{../Common/references}
 	
-	
-	
-	
-	\appendices
-	\section{Proof of the First Zonklar Equation}
-	Appendix one text goes here.
-	
-	% you can choose not to have a title for an appendix
-	% if you want by leaving the argument blank
-	\section{}
-	Appendix two text goes here.
-	
-	
-	% use section* for acknowledgment
-	\section*{Acknowledgment}
-	
-	
-	The authors would like to thank...
-	
-	\nocite{StatisticalAnalysesReproducibleResearch,%
-		RRComputationalHarmonicAnalysis,%
-		RREconometrics,%
-		RRSignalProcessing,%
-		AddressingNeedDataCodeSharingComputationalScience,%
-		ReproducibleResearchinComputationalScience,%
-		TenRulesReproducibleComputationalResearch,%
-		ManifestoReproducibleScience}
-	
-	\bibliographystyle{IEEEtran}
-	\bibliography{../Common/references}
-	
-	%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
-	%% or if you just want to reserve a space for a photo:
-	%\end{IEEEbiography}
+%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
+%% or if you just want to reserve a space for a photo:
+%\end{IEEEbiography}
 	
 \end{document}
 
