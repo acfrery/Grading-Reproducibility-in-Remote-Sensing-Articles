@@ -31,7 +31,7 @@
 \author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
 Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
 and~Qi~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
-\thanks{A.\ C.\ Frery is with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil (email: acfrery@laccan.ufal.br)}% <-this % stops a space
+\thanks{A.\ C.\ Frery is with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil, and with the Key Lab of Intelligent Perception and Image Understanding of the Ministry of Education, Xidian University, Xi'an, China. (email: acfrery@laccan.ufal.br)}% <-this % stops a space
 \thanks{Luis Gomez is with the Universidad de Las Palmas de Gran Canaria, Spain}% <-this % stops a space
 \thanks{Qi Wang is with the Northwestern Polytechnical University, China}% <-this % stops a space
 \thanks{Manuscript received XX, accepted YY.}}
@@ -88,13 +88,16 @@ Universally accessible and informative web page containing:
 			\item PDFs of relevant versions, including information of its submission to repositories (arXiv, etc.), journal or conference
 			\item\label{item:SourceDocumentFiles} \LaTeX\ and \BibTeX\ files, images, and plots
 		\end{enumerate}
-		\item Computational platform (machine, model, operating system, software, libraries, and versions)
+		\item\label{item:Platform} Computational platform (machine, model, operating system, software, libraries, and versions)
 		\item Code (with comments)
 		\item Data
 		\item Which software components are FLOSS or free (including operating system)?
-		\item How to install and run the code (instructions and examples)
-		\item How to read and modify the data \item How to generate the plots, images (where they improved for visualization? how?), and tables (rounding, truncating, etc.)
-		
+		\item Provide precise instructions and examples about:
+		\begin{enumerate}
+			\item How to install and run the code;
+			\item How to read and modify the data;
+			\item How to generate the plots, images (where they improved for visualization? how?), and tables (rounding, truncating, etc.)
+		\end{enumerate}
 	\end{enumerate}
 	
 	
@@ -109,6 +112,11 @@ Universally accessible and informative web page containing:
 			& \\ \bottomrule
 		\end{tabular}
 	\end{table*}
+
+\section{Reproducibility and Simulation}
+
+Stochastic simulation is at the core of randomized algorithms as, for instance, Monte Carlo experiments.
+In order to make such algorithms reproducible, apart from the information in item~\ref{item:Platform} above, the authors must inform the pseudo-random number generator and the seeds employed.
 
 \section{How to Start Writing a Reproducible Article}
 
@@ -145,9 +153,7 @@ Check Ref.~\cite{EditorialGRSL2015} for naming convention and revision handling 
 \input{../Figures/tikz/RepoStructure}
 \caption{Recommended structure of a repository for scientific texts}\label{Fig:StructRepo}
 \end{figure}
-	
-\section{Conclusion}
-The conclusion goes here.
+
 	
 \section*{Acknowledgments}
 The authors would like to thank...
@@ -162,7 +168,7 @@ TenRulesReproducibleComputationalResearch,%
 ManifestoReproducibleScience}
 	
 \bibliographystyle{IEEEtran}
-\bibliography{../Common/references}
+\bibliography{./Common/references}
 	
 %\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
 %% or if you just want to reserve a space for a photo:

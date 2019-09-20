@@ -1,4 +1,4 @@
-\begin{tikzpicture}[node distance=1.3cm,scale=.5]
+\begin{tikzpicture}[node distance=1cm,scale=.5]
 
 \node (data) [root] {Data};
 \node (figures) [root, below of=data] {Figures};
@@ -9,10 +9,10 @@
 \node (C) [root, below of=R] {C};
 \node (Matlab) [root, below of=C] {Matlab};
 %
-\node (text) [root, below of=code, yshift=-4cm] {Text};
+\node (text) [root, below of=code, yshift=-3.2cm] {Text};
 \node (common) [root, below right of=text, xshift=1cm, yshift=-.5cm] {Common};
 \node (biblio) [files, below right of=common] {.bib};
-\node (reports) [root, below of=common, yshift=-1cm] {Reports};
+\node (reports) [root, below of=common, yshift=-.5cm] {Reports};
 \node (articles) [root, below of=reports] {Articles};
 %
 \draw [link] (data) -- (figures);
