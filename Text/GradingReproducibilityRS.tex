@@ -1,28 +1,28 @@
-\documentclass[journal]{IEEEtran}
+\documentclass[journal,twopage]{IEEEtran}
 
 \usepackage{cite}
 \usepackage{texnames}
 \usepackage{graphicx}
-\graphicspath{{../Figures/PDF/}{}}
-\DeclareGraphicsExtensions{.pdf,.jpeg,.png}
+\graphicspath{{../Figures/PDF/}{../Figures/PNG/}}
+\DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
 
 \usepackage{amsmath}
 \interdisplaylinepenalty=2500
 \usepackage{algorithmic}
 \usepackage{array}
-\usepackage[caption=false,font=footnotesize]{subfig}
+\usepackage[font=footnotesize,margin=1ex]{subcaption}
 %\usepackage{dblfloatfix}
 %\usepackage[nomarkers]{endfloat}
 \usepackage{url}
 \usepackage{booktabs}
 
-\usepackage{tikz}
-\usetikzlibrary{shapes.geometric,arrows,trees}
-
-
-\tikzstyle{root} = [rectangle, rounded corners, minimum width=2cm, minimum height=.7cm, text centered, draw=black, fill=blue!30]
-\tikzstyle{files} = [rectangle, minimum width=1cm, minimum height=.5cm, text centered, draw=black, fill=white]
-\tikzstyle{link} = [thick, -]
+%\usepackage{tikz}
+%\usetikzlibrary{shapes.geometric,arrows,trees}
+%
+%
+%\tikzstyle{root} = [rectangle, rounded corners, minimum width=2cm, minimum height=.7cm, text centered, draw=black, fill=blue!30]
+%\tikzstyle{files} = [rectangle, minimum width=1cm, minimum height=.5cm, text centered, draw=black, fill=white]
+%\tikzstyle{link} = [thick, -]
 
 \begin{document}
 	
@@ -37,7 +37,7 @@ and~Qi~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
 \thanks{Manuscript received XX, accepted YY.}}
 	
 \markboth{IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing,~Vol.~XX, No.~YY, Month~2020}%
-{Frery \MakeLowercase{\textit{et al.}}: Grading Reproducibility}
+{Frery \MakeLowercase{\textit{et al.}}: Reproducibility and Replicability}
 	
 \maketitle
 	
@@ -100,7 +100,7 @@ Universally accessible and informative web page containing:
 		\item Paper identification (if different from~\ref{item:ProjectID})
 		\begin{enumerate}
 			\item Title
-: that of the corresponding author)
+			\item Contact: the corresponding author
 			\item Abstract
 			\item PDFs of relevant versions, including information of its submission to repositories (arXiv, etc.), journal or conference
 			\item\label{item:SourceDocumentFiles} \LaTeX\ and \BibTeX\ files, images, and plots
@@ -193,6 +193,25 @@ The research course may change along the work, but telling the whole story adds 
 
 Publishers should recognize those articles that comply with reproducibility criteria by assigning a badge.
 According to Munaf\`o et al.~\cite{ManifestoReproducibleScience}, this practice increased by an order of magnitude articles with open data in the \textit{Psychological Science} journal.
+
+ACM -- The Association for Computing Machinery has a five-level badging system (\url{https://www.acm.org/publications/policies/artifact-review-badging}), illustrated in Fig.~\ref{fig:ACM-Badging}.
+
+\begin{figure}[hbt]
+\centering
+\subcaptionbox{Functional artifacts\label{Fig:Functional}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_functional}}
+\subcaptionbox{Reusable artifacts\label{Fig:Reusable}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_reusable}}
+\subcaptionbox{Available artifacts\label{Fig:Available}}{\includegraphics[width=.19\columnwidth]{artifacts_available}}
+\subcaptionbox{Reproducible results\label{Fig:Reproducible}}{\includegraphics[width=.19\columnwidth]{results_reproduced}}
+\subcaptionbox{Replicable results\label{Fig:Replicable}}{\includegraphics[width=.19\columnwidth]{results_replicated}}
+\caption{ACM five-level badging system}\label{fig:ACM-Badging}
+\end{figure}
+
+It is worth noting that levels~\ref{Fig:Functional} and~\ref{Fig:Reusable} do not grant \textit{per se} reproducibility.
+They just acknowledge that the authors made their code available to reviewers, and that it is functional and reusable.
+Level~\ref{Fig:Available} 
+The remote sensing community should strive to attain, at least, level~\ref{Fig:Reproducible}.
+
+We believe that a similar, even if simpler, badging system will have great positive impact in the remote sensing community.
 
 Quoting Ref.~\cite{PraxisofReproducibleComputationalScience}:
 \begin{quote}
