@@ -138,7 +138,7 @@ A reproducible study should, besides providing the samples used, state the follo
 \begin{enumerate}
 	\item Objective criteria set \textit{a priori} for sample collection.
 	\item Number of samples, sample size, and descriptive statistics for the aggregated data.
-	\item Objective criteria for sample selection.
+	\item Objective criteria for sample selection and data imputation.
 \end{enumerate}
 
 Stochastic simulation is at the core of randomized algorithms as, for instance, Monte Carlo experiments.
@@ -174,12 +174,14 @@ Notice that there is a single \BibTeX\ file (with extension \verb|.bib| in the \
 \BibTeX\ references can be split on several files, but these files should be common to all projects.
 This avoids outdated and redundant bibliographic data bases.
 
-Every article should be in its pwn directory.
+Every article should be in its own directory.
 Avoid using the name of the journal where you will submit your work for the directory and document names, as the destination may change along the process.
 
 Data, figures, images and code should be common to all projects, as one typically reuses them.
+Inform in your \LaTeX\ code the source of each figure, for instance with a comment of the form \texttt{\%\%\% The source is in /Figures/DrawIO/DirectoryStructure.drawio}.
+This will help the review process, and the communication between authors.
 
-Check Ref.~\cite{EditorialGRSL2015} for naming convention and revision handling of submitted manuscripts.
+Check Ref.~\cite{EditorialGRSL2015} for a naming convention and suggestions for revision handling of submitted manuscripts.
 
 
 \section{Good Scientific Practices}
