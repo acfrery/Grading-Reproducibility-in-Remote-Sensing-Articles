@@ -3,7 +3,7 @@
 \usepackage{cite}
 \usepackage{texnames}
 \usepackage{graphicx}
-\graphicspath{{}{}}
+\graphicspath{{../Figures/PDF/}{}}
 \DeclareGraphicsExtensions{.pdf,.jpeg,.png}
 
 \usepackage{amsmath}
@@ -11,7 +11,7 @@
 \usepackage{algorithmic}
 \usepackage{array}
 \usepackage[caption=false,font=footnotesize]{subfig}
-\usepackage{dblfloatfix}
+%\usepackage{dblfloatfix}
 %\usepackage[nomarkers]{endfloat}
 \usepackage{url}
 \usepackage{booktabs}
@@ -26,7 +26,7 @@
 
 \begin{document}
 	
-\title{Grading Reproducibility in Remote Sensing Articles}
+\title{Reproducibility and Replicability in Remote Sensing Research}
 	
 \author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
 Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
@@ -54,7 +54,7 @@ Remote Sensing
 
 \IEEEpeerreviewmaketitle
 
-\section{Introduction}
+\section{Introduction}\label{Sec:Introduction}
 	
 \IEEEPARstart{R}{eproducibility} is at the core of experimental sciences. 
 It is also a basilar element of scientific integrity. 
@@ -113,10 +113,19 @@ Universally accessible and informative web page containing:
 		\end{tabular}
 	\end{table*}
 
-\section{Reproducibility and Simulation}
+\section{Reproducibility, Samples and Simulation}
+
+Many studies rely on the information provided by samples;
+few of them detail the procedure with which they were collected.
+A reproducible study should, besides providing the samples used, state the following:
+\begin{enumerate}
+	\item Objective criteria set \textit{a priori} for sample collection.
+	\item Number of samples, sample size, and descriptive statistics for the aggregated data.
+	\item Objective criteria for sample selection.
+\end{enumerate}
 
 Stochastic simulation is at the core of randomized algorithms as, for instance, Monte Carlo experiments.
-In order to make such algorithms reproducible, apart from the information in item~\ref{item:Platform} above, the authors must inform the pseudo-random number generator and the seeds employed.
+In order to make such algorithms reproducible, apart from the information in Section~\ref{Sec:Introduction}, item~\ref{item:Platform}, the authors must inform the pseudo-random number generator and the seeds employed.
 
 \section{How to Start Writing a Reproducible Article}
 
@@ -134,6 +143,13 @@ and miscellaneous documents.
 
 Fig.~\ref{Fig:StructRepo} illustrates the recommended basic structure for a repository holding several \LaTeX\ files (or projects), along with their associated data and code.
 
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=.35\columnwidth]{DirectoryStructure}
+	\caption{Recommended structure of a repository for scientific projects.}\label{Fig:StructRepo}
+	%%% The source is in /Figures/DrawIO/DirectoryStructure.drawio
+\end{figure}
+
 Every directory may contain specific subdirectories.
 For instance, \verb|Data| may contain \verb|CSV|, \verb|text|, and other directories with specific data files.
 
@@ -148,11 +164,18 @@ Data, figures, images and code should be common to all projects, as one typicall
 
 Check Ref.~\cite{EditorialGRSL2015} for naming convention and revision handling of submitted manuscripts.
 
-\begin{figure}[hbt]
-\centering
-\input{../Figures/tikz/RepoStructure}
-\caption{Recommended structure of a repository for scientific texts}\label{Fig:StructRepo}
-\end{figure}
+
+\section{Good Scientific Practices}
+
+Science is not only made of positive results.
+Sticking to this path may restrict the outcomes to confirmatory studies, avoiding those lines of research that do not produce immediately publishable results.
+Scientific honesty requires telling the whole story, starting from clearly defining the research protocol~\cite{TellItlikeItIs}.
+The research course may change along the work, but telling the whole story adds more to the scientific knowledge that reporting only the evidence and the conclusions that are aligned with the starting hypotheses.
+
+\section{Recommendations}
+
+Publishers should recognize those articles that comply with reproducibility criteria by assigning a badge.
+According to Munaf\`o et al.~\cite{ManifestoReproducibleScience}, this practice increased by an order of magnitude articles with open data in the \textit{Psychological Science} journal.
 
 	
 \section*{Acknowledgments}
@@ -165,14 +188,17 @@ RRSignalProcessing,%
 AddressingNeedDataCodeSharingComputationalScience,%
 ReproducibleResearchinComputationalScience,%
 TenRulesReproducibleComputationalResearch,%
-ManifestoReproducibleScience}
+AddressingNeedDataCodeSharingComputationalSciencePublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication,%
+SevenReasonsWhyaUsersGuidetoTransparencyandReproducibility,%
+OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms,%
+ReproducibilityofScientificResults2018,%
+ReproducibleResearchandGIScienceanEvaluationUsingAGILEConferencePapers,%
+TheStateofReproducibilityintheComputationalGeosciences}
 	
 \bibliographystyle{IEEEtran}
 \bibliography{./Common/references}
 	
-%\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{mshell}}]{Michael Shell}
-%% or if you just want to reserve a space for a photo:
-%\end{IEEEbiography}
+
 	
 \end{document}
 
