@@ -26,7 +26,7 @@
 
 \begin{document}
 	
-\title{Proposal of a Badging System for Reproducibility in Remote Sensing Research}
+\title{Proposal of a Badging System for Reproducibility and Replicability in Remote Sensing Research}
 	
 \author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
 Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
@@ -98,7 +98,17 @@ Quoting Ref.~\cite{PraxisofReproducibleComputationalScience}:
 
 \section{Badging Systems}
 
-Are striving to recognize those articles that comply with reproducibility criteria by assigning badges.
+The IPOL Journal -- Image Processing On Line~\cite{IPOL} is a noteworthy example of reproducibility and replicability.
+In its own words, IPOL
+\begin{quote}
+is a research journal of image processing and image analysis which emphasizes the role of mathematics as a source for algorithm design and the reproducibility of the research. Each article contains a text on an algorithm and its source code, with an online demonstration facility and an archive of experiments. Text and source code are peer-reviewed and the demonstration is controlled. IPOL is an Open Science and Reproducible Research journal.
+\end{quote}
+
+We notice, though, that publishing in IPOL requires more work than publishing in other journals. 
+The journal imposes strict conditions on the source code that, more often than not, take a lot of time from the authors.
+Going down such a path does not seem adequate for the Remote Sensing community.
+
+The scientific community is striving to recognize those articles that comply with reproducibility criteria by assigning badges.
 In the sequel, we mention two of those initiatives.
 
 To date, sixty seven journals use the Open Science badging system\footnote{https://cos.io/our-services/open-science-badges/}.
@@ -136,9 +146,41 @@ We believe that a similar, even if simpler, badging system will have great posit
 
 \subsection{Code Ocean}
 
+IEEE has teamed with Code Ocean to\footnote{\url{https://ieeexplore.ieee.org/Xplorehelp/#/faqs/code-ocean#what-is-ieee-xplore-code-ocean}}
+\begin{quote}
+enable authors to further enhance the visibility and impact of their research by enabling them to share their code on Code Ocean so that readers can browse, view, run and experiment with the code.
+
+Readers can discover, browse, run, modify code, and input data to experiment, reproduce, and build on your research, all in the cloud, without any other setup or software license.
+\end{quote}
+
+Code Ocean currently supports 
+C/C++, 
+Fortran,
+Java,
+Julia,
+Lua,
+MATLAB,
+Octave,
+Perl,
+Python,
+R, and
+Stata in most available versions.
+It, thus, covers the major programming languages in which the Remote Sensing community develops its research.
+
 \subsection{GRSS Code Library}
 
+The IEEE Remote Sensing Code Library -- RSCD\footnote{\url{http://www.grss-ieee.org/publication-category/rscl/}} is 
+\begin{quote}
+an on-line curated repository of software related to remote sensing missions, instruments, processing, and applications.
+
+Software should be relevant to the theory, concepts, and techniques of science and engineering as applied to sensing the earth, oceans, atmosphere, and space, and the processing, interpretation, and dissemination of this information.
+\end{quote}
+
+As such, RSCD is a major player in the Remote Sensing reproducibility and replicability game.
+
 \section{Proposal}
+
+In this section, we propose a badging system to identify works that comply with minimum requirements of reproducibility and replicability in Remote Sensing research.
 
 \subsection{Requirements}
 
@@ -191,11 +233,27 @@ Scientific honesty requires telling the whole story, starting from clearly defin
 The research course may change along the work, but telling the whole story adds more to the scientific knowledge that reporting only the evidence and the conclusions that are aligned with the starting hypotheses.
 
 
-\subsubsection{Open data}
+\subsubsection{Open data} Open data can be accessed, used, and shared by Governments, businesses and individuals. 
+Open data should be stored in widely accessible and persistent repositories, in common machine-readable formats.
+Please notice that Excel\textsuperscript{\textcopyright}\ spreadsheets do not comply with this requirement; use Comma-Separated Values (with \verb|.csv| extension) instead.
+Although Open data are not necessarily free data, the authors must at least provide free samples.
 
-\subsubsection{Free/Libre Open Source Software}
+\subsubsection{Free/Libre Open Source Software (FLOSS)}
+
+FLOSS source code is licensed free of charge, encouraging modifications and improvements.
+
+Notable FLOSS platforms for Remote Sensing research are 
+R\footnote{\url{https://www.r-project.org/about.html}} (for statistical computing and production of high-quality graphics),
+Python\footnote{\url{https://www.python.org/about/}} (an interpreted, object-oriented, high-level programming language with dynamic semantics),
+GNU Octave\footnote{\url{https://booki.flossmanuals.net/command-line/gnu-octave.html#}} (an array-programming oriented language),
 
 \subsubsection{Code}
+
+Providing the code that transformed data into knowledge is a cornerstone in Remote Sensing Reproducible Research.
+This requires lots of generosity, and a change of mindset, but it is fundamental for the advancement of Science.
+
+We urge authors to adhere to good practices as, for instance, those discussed in~Ref.~\cite[Chapter 7]{WritingScientificSoftware}.
+Bear in mind that sharing code aims at allowing others to use it, so you must provide running examples, and comments that allow your readers to make the necessary changes for, for instance, changing the input data.
 
 \subsubsection{Text}
 
@@ -241,7 +299,7 @@ It served as guide for the structure of this paper.
 \begin{figure}[hbt]
 \centering
 \includegraphics[width=\linewidth]{"Badging RSRR.pdf"}
-\caption{The mind map that led to this paper}\label{Fig:Doodle}
+\caption{The mind map that led to this paper.}\label{Fig:Doodle}
 %%% The source is in /Figures/FreeMind/Badging RSRR.mm
 \end{figure}
 
@@ -282,6 +340,9 @@ Data, figures, images and code should be common to all projects, as one typicall
 Inform in your \LaTeX\ code the source of each figure, for instance with a comment of the form \texttt{\%\%\% The source is in /Figures/DrawIO/DirectoryStructure.drawio}.
 This will help the review process, and the communication between authors.
 
+The \verb|Outputs| directory should contain both intermediate, but interesting, results (in \verb|Tests|), and those results that made it into the final report (in \verb|Results|).
+Good documentation is fundamental to help you, your team, and others to catch up from where you stopped.	
+
 Check Ref.~\cite{EditorialGRSL2015} for a naming convention and suggestions for revision handling of submitted manuscripts.
 
 \subsection{Communication}
@@ -315,6 +376,16 @@ This board can be copied, and assigned to a team, whose leader can assign tasks 
 As Trello keeps track of every single modification, it becomes a useful resource when it comes to reproducibility.
 
 \section{Challenges}
+
+\subsection{Point-and-click software}
+
+\subsection{Deep Learning}
+
+\subsection{Culture}
+
+\subsubsection{Overhead and mindset}
+
+\subsubsection{Ownership and copyright}
 
 	
 \section*{Acknowledgments}
