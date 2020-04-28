@@ -1,11 +1,11 @@
 \documentclass[journal,twoside]{IEEEtran}
 
-\usepackage{cite}
 \usepackage{texnames}
 \usepackage{graphicx}
 \graphicspath{{../Figures/PDF/}{../Figures/PNG/}}
 \DeclareGraphicsExtensions{.pdf,.png,.jpg,.jpeg}
 
+\usepackage{color}
 \usepackage{amsmath}
 \interdisplaylinepenalty=2500
 \usepackage{algorithmic}
@@ -26,7 +26,7 @@
 
 \begin{document}
 	
-\title{Proposal of a Badging System for Reproducibility and Replicability in Remote Sensing Research}
+\title{Proposal of a Badging System for Reproducibility in Remote Sensing Research}
 	
 \author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
 Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
@@ -42,10 +42,10 @@ and~Qi~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
 \maketitle
 	
 \begin{abstract}
-Remote Sensing is a truly active research area, where many actors play a fundamental role, from industry (public or private) to large or small research groups. 
+\textcolor{red}{Remote Sensing is a truly active research area, where many actors play a fundamental role, from industry (public or private) to large or small research groups. 
 From that intensive activity, methods, algorithms and techniques are continuously published or broadcasted through papers, conferences, repositories or other means. 
 In most cases, there is a sound interest from researchers to use those methods, what implies easy availability of the related methods (computational codes or more detailed descriptions) and implicitly, that method have been extensively tested and they are ready for its use. 
-Reproducibility research comprises all those issues just mentioned. In this paper, we aim to provide insights to complement the visibility of research in the area of Remote Sensing and, what is considered more relevant: to \textit{seduce} Authors to include those resources  in their common scientific activity.
+Reproducibility research comprises all those issues just mentioned. In this paper, we aim to provide insights to complement the visibility of research in the area of Remote Sensing and, what is considered more relevant: to \textit{seduce} Authors to include those resources  in their common scientific activity.}
 \end{abstract}
 	
 \begin{IEEEkeywords}
@@ -224,12 +224,11 @@ Some of the direct benefits for papers published under the RSRR Badge are
 
 As authors' obligation, a pre-requisite to obtain the badge is the acknowledgement that the paper is Reproducible in all the terms for a period of at least five years.
 
-\section{How to Start Writing a Reproducible Article}
+\section{Tools}
 
 Starting well saves lots of time.
-Here we make simple recommendations that may save time and efforts.
-We assume that you use \LaTeX\ and \BibTeX.
-
+We make recommendations that may save time and efforts.
+All of them are either free, or offer a free operational version which usually suits the needs of relatively small remote sensing reproducible research projects.
 
 \subsection{Doodling}
 
@@ -246,7 +245,11 @@ It served as guide for the structure of this paper.
 %%% The source is in /Figures/FreeMind/Badging RSRR.mm
 \end{figure}
 
+Having such an editable visual structure, along with properties and relationships between elements, helps reminding and documenting the progress of the project.
+
 \subsection{Git repository}
+
+We assume in this section that you use \LaTeX\ and \BibTeX.
 
 The main idea consists in having a single repository for all the scientific texts you write: 
 theses, 
@@ -280,7 +283,36 @@ Inform in your \LaTeX\ code the source of each figure, for instance with a comme
 This will help the review process, and the communication between authors.
 
 Check Ref.~\cite{EditorialGRSL2015} for a naming convention and suggestions for revision handling of submitted manuscripts.
-x
+
+\subsection{Communication}
+
+Most of the research in remote sensing is collaborative, and involves two or more authors.
+This is mostly due to the interdisciplinary nature of the area, which requires complementary competencies.
+Communication in such scenario is of paramount importance.
+
+Although e-mail is a powerful tool, synchronous communication is often required.
+WhatsApp and WeChat are the commonplace for real-time exchange of ideas, but they do not offer either the tools or the organization required for prolific and time-saving technical conversations.
+
+Slack\footnote{\url{https://slack.com/}} serves this purpose well.
+It organizes conversations in channels, connects with other applications (Google Suit, meetings, Github, polls, etc.) promoting, thus, focus and persistence.
+
+\subsection{Task management}
+
+We have stressed the importance of using a Kanban-style management method for building a project~\cite{SuccessfulScientificPublishingfromtheProjecttotheAdvertising}.
+Such method is also recommended for simple task management.
+Although a more sophisticated tool, such as ProjectLibre\footnote{\url{https://www.projectlibre.com/}} is highly advisable for projects which involve several participants, resources, deliverables, and deadlines, the process of organizing and maintaining a remote sensing reproducible project is usually well met by Trello\footnote{\url{https://trello.com/}}.
+
+Fig.~\ref{Fig:ScientificCanvas} shows the structure of a Scientific Canvas in Trello, freely available at \url{https://trello.com/b/C747M1GX}.
+Cards are organized in lists, and lists in groups.
+This board can be copied, and assigned to a team, whose leader can assign tasks (cards), with deadlines, reminders, and several other utilities.
+
+\begin{figure}[hbt]
+\centering
+\includegraphics[width=\linewidth]{ScientificCanvas}
+\caption{A Trello implementation of a Scientific Canvas}\label{Fig:ScientificCanvas}
+\end{figure}
+
+As Trello keeps track of every single modification, it becomes a useful resource when it comes to reproducibility.
 
 \section{Challenges}
 
