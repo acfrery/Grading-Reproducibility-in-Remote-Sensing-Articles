@@ -30,10 +30,10 @@
 	
 \author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
 Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
-and~Qi~Wang,~\IEEEmembership{Senior Member,~IEEE}% <-this % stops a space
-\thanks{A.\ C.\ Frery is with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil, and with the Key Lab of Intelligent Perception and Image Understanding of the Ministry of Education, Xidian University, Xi'an, China. (email: acfrery@laccan.ufal.br)}% <-this % stops a space
+and~Antonio~C.~Medeiros% <-this % stops a space
+\thanks{A.\ C.\ Frery and A.\ C.\ Medeiros are with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil.
+A.\ C.\ Frery is also with the Key Lab of Intelligent Perception and Image Understanding of the Ministry of Education, Xidian University, Xi'an, China. (email: acfrery@laccan.ufal.br)}% <-this % stops a space
 \thanks{Luis Gomez is with the Universidad de Las Palmas de Gran Canaria, Spain}% <-this % stops a space
-\thanks{Qi Wang is with the Northwestern Polytechnical University, China}% <-this % stops a space
 \thanks{Manuscript received XX, accepted YY.}}
 	
 \markboth{IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing,~Vol.~XX, No.~YY, Month~2020}%
@@ -63,7 +63,13 @@ Remote Sensing
 It is also a basilar element of scientific integrity. 
 The advent of data science is leading to new requirements and practices able to cope with the challenges posed by huge volumes of data, often of dynamic nature. 
 
-Modern grounds for Reproducible Research were set before the widespread use of deep learning and other massively data-based techniques. 
+Modern grounds for Reproducible Research were set before the widespread use of deep learning and other massively data-based techniques.
+
+Reproducible research has many benefits but also many challenges, and the ones related to software are of outmost importance.
+
+Most remote sensing papers support the evidences of the proposed research by computational codes of medium or high complexity. 
+More often than not, while not bearing in mind the reproducibility of the research done, codes are developed under the philosophy of ``getting just results for the paper,'' and then, they will rest in hard drives. 
+It is frequent that, even the ones that implemented the codes, can not execute them after some time has passed.  
 
 Among the efforts made towards building Remote Sensing Reproducible Research environments, one may mention Code Ocean and GRSS Remote Sensing Code Library. 
 These two initiatives belong to the IEEE scientific ecosystem. 
@@ -181,6 +187,7 @@ As such, RSCD is a major player in the Remote Sensing reproducibility and replic
 \section{Proposal}
 
 In this section, we propose a badging system to identify works that comply with minimum requirements of reproducibility and replicability in Remote Sensing research.
+Fig.~\ref{Fig:BadgeProcess} shows the workflow for its implementation.
 
 \subsection{Requirements}
 
@@ -214,6 +221,9 @@ The first requisite for being considered a RSRR is associating the manuscript to
 		\item How to generate the plots, images (where they improved for visualization? how?), and tables (rounding, truncating, etc.)
 	\end{enumerate}
 \end{enumerate}
+
+Most researchers are able to produce a basic web page. 
+Bear in mind that basic web pages are likely to attract users, and they suffice to enrich the visibility the research.
 
 \subsubsection{Experimental design} Many studies rely on the information provided by samples;
 few of them detail the procedure with which they were collected.
@@ -257,8 +267,25 @@ All platforms mentioned in this section have similar communities.
 Providing the code that transformed data into knowledge is a cornerstone in Remote Sensing Reproducible Research.
 This requires lots of generosity, and a change of mindset, but it is fundamental for the advancement of Science.
 
+Researchers are benefited from the assistance of well-trained programmers (software engineers) that make software's issues simpler. 
+But in other situations, researchers must prepare the codes by themselves and this, is not an easy task. 
+Decisions such as selecting the most appropriate tool (C?, Python?, on Windows or Linux?) or what public libraries to use are not trivial either.
+
+Therefore, among others, software challengers related to reproducibility and replicability can be summarized as follows:
+\begin{itemize}
+	\item properly select the best software in terms of efficiency, to support the work;
+	\item properly select the best software to be easily used, updated, and reported;
+	\item make the software as easy to use as possible.
+\end{itemize}
+
+Note that software efficiency is closely related to the hardware and operating system on which it runs.
+Therefore, the implementation must be designed aiming at its easy and fast adaptation to new coming machines and environments. 
+This is specially true for the challengers that the deep learning paradigm brings into Remote Sensing research.
+
 We urge authors to adhere to good practices as, for instance, those discussed in~Ref.~\cite[Chapter 7]{WritingScientificSoftware}.
 Bear in mind that sharing code aims at allowing others to use it, so you must provide running examples, and comments that allow your readers to make the necessary changes for, for instance, changing the input data.
+
+For instance, for C, Java, Python programmers, the  GNU General Public License tool, Doxygen\footnote{\url{http://doxygen.nl}}, easily generates documentation from flat sources and it also provides visual representations of the code in an hierarchical attractive and very useful way.
 
 \subsubsection{Text}
 
@@ -368,7 +395,10 @@ Avoid using the name of the journal where you will submit your work for the dire
 
 Data, figures, images and code should be common to all projects, as one typically reuses them.
 Inform in your \LaTeX\ code the source of each figure, for instance with a comment of the form \texttt{\%\%\% The source is in /Figures/DrawIO/DirectoryStructure.drawio}.
-This will help the review process, and the communication between authors.
+This will help the review process, and the communication between authors. 
+The use of relative paths  for \LaTeX\  is strictly required, e.g., \texttt{../../more-path/figures}, and \texttt{../../more-path/video\_demos}. 
+This applies also to codes (\texttt{../../more-path/my\_personal\_library}).
+
 
 The \verb|Outputs| directory should contain both intermediate, but interesting, results (in \verb|Tests|), and those results that made it into the final report (in \verb|Results|).
 Good documentation is fundamental to help you, your team, and others to catch up from where you stopped.	
@@ -396,6 +426,7 @@ Although a more sophisticated tool, such as ProjectLibre\footnote{\url{https://w
 Fig.~\ref{Fig:ScientificCanvas} shows the structure of a Scientific Canvas in Trello, freely available at \url{https://trello.com/b/C747M1GX}.
 Cards are organized in lists, and lists in groups.
 This board can be copied, and assigned to a team, whose leader can assign tasks (cards), with deadlines, reminders, and several other utilities.
+Details of such organization, which is inspired by the canvases discussed in Ref.~\cite{osterwalder2010business}, were presented in~\cite{SuccessfulScientificPublishingfromtheProjecttotheAdvertising}.
 
 \begin{figure}[hbt]
 \centering
@@ -409,7 +440,17 @@ As Trello keeps track of every single modification, it becomes a useful resource
 
 \subsection{Point-and-click software}
 
+The ease of use of point-and-click software based on predefined menus is undeniable.
+Such platforms may conspire against reproducibility, though.
+A fully reproducible process, if totally based on such a platform, must state step-by-step the procedure.
+For this reason, it is advisable to prefer software that allows coding.
+
 \subsection{Deep Learning}
+
+Deep learning in general, and CNNs -- Convolutional Neural Networks in particular, have seen lately an extraordinary increase in popularity in the Remote Sensing community~\cite{DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience}. 
+Any reproducible approach must pay special attention to what this so efficient machine learning approach is capable to get from data (specially from the Big Data).
+
+Some of the challenges that these studies pose for their reproducibility are random initialization, and the need of GPU resources. 
 
 \subsection{Culture}
 
@@ -419,7 +460,8 @@ As Trello keeps track of every single modification, it becomes a useful resource
 
 	
 \section*{Acknowledgments}
-The authors would like to thank...
+
+The authors would like to thank CNPq and Fapeal (Brazil) for partial support of this work.
 	
 \nocite{StatisticalAnalysesReproducibleResearch,%
 RRComputationalHarmonicAnalysis,%
