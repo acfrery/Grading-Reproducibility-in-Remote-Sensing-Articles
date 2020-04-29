@@ -245,7 +245,12 @@ FLOSS source code is licensed free of charge, encouraging modifications and impr
 Notable FLOSS platforms for Remote Sensing research are 
 R\footnote{\url{https://www.r-project.org/about.html}} (for statistical computing and production of high-quality graphics),
 Python\footnote{\url{https://www.python.org/about/}} (an interpreted, object-oriented, high-level programming language with dynamic semantics),
-GNU Octave\footnote{\url{https://booki.flossmanuals.net/command-line/gnu-octave.html#}} (an array-programming oriented language),
+GNU Octave\footnote{\url{https://booki.flossmanuals.net/command-line/gnu-octave.html#}} (an array-programming oriented language).
+The European Space Agency -- ESA freely distributes SNAP -- SeNtinel’s Application Platform\footnote{\url{http://step.esa.int/main/toolboxes/snap/}}.
+Developed in Java and Python.
+SNAP is intended for interactive image visualisation and analysis, but it also allows scripting and software and extension with new functionalities.
+Moreover, ESA promotes STEP, a community platform for accessing the software and its documentation, communicating with the developers, dialoguing within the science community, promoting results and achievements as well as providing tutorials and material for training scientists using the Toolboxes.
+All platforms mentioned in this section have similar communities.
 
 \subsubsection{Code}
 
@@ -257,6 +262,20 @@ Bear in mind that sharing code aims at allowing others to use it, so you must pr
 
 \subsubsection{Text}
 
+Zobel's book~\cite{WritingforComputerScience} discusses general guidelines of adequate scientific writing.
+We add elements that promote to reproducibility and replicability.
+
+The methodological part of the text is essential for reproducibility.
+It must state clearly all the assumptions, details of the context, materials, and procedures the authors employed during their research.
+A good Methodology section is a roadmap for reproducing exactly the same study and, ideally, obtaining the same results.
+
+In the same manner the authors identified missing knowledge while performing the analysis of the state-of-the art and, with it, made a contribution, their work should point at future enhancements, improvements, and advances.
+The more straightforward these remarks are, the easier will be for other researchers (and for the authors themselves) to continuing contributing to this line of research.
+
+Since the source \LaTeX\ and \BibTeX\ will be available, the authors should be generous with comments.
+Such additional information will not make it to the final published work, but can be useful to those readers that will use this material.
+
+
 \subsection{Implementation}
 
 GRSS should implement a Remote Sensing Reproducibility Committee for each of its (currently) four journals, namely:
@@ -267,16 +286,25 @@ IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing
 This committee will act solely on accepted papers for which the authors have requested the RSRR Badge.
 
 The the assessment process has three possible outcomes:
-\begin{description}
-	\item[Fully RSRR:]
-	\item[Partially RSRR:] 
-	\item[No badge:]
-\end{description}
+\begin{itemize}
+	\item \textbf{Fully RSRR:} the article is fully compliant with the reproducibility and replicability criteria.
+	\item \textbf{Partially RSRR:} the article is partially compliant with the reproducibility and replicability criteria, as it does not use exclusively FLOSS software.
+	\item \textbf{No badge:} the manuscript does not comply with at least one of the mandatory reproducibility requirements.
+\end{itemize}
 
-Some of the direct benefits for papers published under the RSRR Badge are
+Fig.~\ref{Fig:BadgeProcess} illustrates the proposed badge awarding process.
+
+\begin{figure}[hbt]
+	\centering
+	\includegraphics[width=.7\columnwidth]{BadgeAwardingProcess}
+	\caption{Flowchart of the badge awarding process}\label{Fig:BadgeProcess}
+	%%% The source for this figure is in /Figures/DrawIO/BadgeAwardingProcess.drawio
+\end{figure}
+
+Some of the direct benefits for papers published under the RSRR Badge are:
 \begin{itemize}
 	\item the paper will display the recognition (both for the paper printed and for the online versions),
-	\item the paper will be specially promoted after publication by the Journals,
+	\item the paper will be specially promoted after publication by the journals,
 	\item the journal will enforce, in each cross-referenced database, that the paper has that badge recognition.
 \end{itemize}
 
