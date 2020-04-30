@@ -12,7 +12,7 @@
 \usepackage{array}
 \usepackage[font=footnotesize,margin=1ex]{subcaption}
 %\usepackage{dblfloatfix}
-%\usepackage[nomarkers]{endfloat}
+\usepackage[binary-units = true]{siunitx}
 \usepackage{url}
 \usepackage{booktabs}
 
@@ -80,8 +80,10 @@ Many authors continuously strive to disseminate their research findings in such 
 This includes the proposal of software architectures, the use of open data, FLOSS (Free/Libre Open Source Software), and other initiatives.
 
 Barba~\cite{TerminologiesforReproducibleResearch} identifies several usages of the terms ``Reproducibility'' and ``Replicability,'' and also the emergence of the term ``Repeatability,'' among others.
+The work by Fidler and Wilcox~\cite{ReproducibilityofScientificResults2018} discusses the use of those terms, surveys meta-analyses that characterize the reproducibility crisis, address epistemological aspects of reproducibility and its value in science, and, finally, comment upon initiatives to alleviate such crisis.
 
-We will discuss two core concepts: Reproducibility and Replicability, in order to simplify the discussion and to arrive to the suggestion of good scientific practices.
+We will discuss two core concepts: Reproducibility and Replicability in the context of Remote Sensing research.
+Such simplification aims at arriving to the suggestion of good scientific practices, and a badging system for the Remote Sensing publication ecosystem.
 
 We will use the metaphor of dwarfs standing on the shoulders of giants which, in the words of Isaac Newton~\cite{LetterNewton}, is
 \begin{quote}
@@ -148,7 +150,13 @@ The remote sensing community should strive to attain, at least, level~\ref{Fig:R
 
 We believe that a similar, even if simpler, badging system will have great positive impact in the remote sensing community.
 
-\section{IEEE Platforms}
+\section{Platforms}
+
+Konkol et al.~\cite{PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication} discuss ten infrastructures for reproducible practices.
+The authors perform analyses from the viewpoints of publishers, editors, authors, readers and reviewers, and librarians.
+The work is an authoritative reference for choosing among the currently available options.
+
+In the following we will comment two different approaches, both available through IEEE.
 
 \subsection{Code Ocean}
 
@@ -172,6 +180,29 @@ Python,
 R, and
 Stata in most available versions.
 It, thus, covers the major programming languages in which the Remote Sensing community develops its research.
+
+The service is available to authors of already accepted papers, so it cannot be integrated into the review process.
+
+\subsection{Data Port}
+
+IEEE describes DataPort™ as\footnote{\url{https://ieee-dataport.org/about-ieee-dataport}} 
+\begin{quote}
+a valuable and easily accessible data platform that enables users to store, search, access and manage data.  
+The data platform is designed to accept all formats and sizes of datasets (up to \SI{2}{\tera\byte}), and it provides both downloading capabilities and access to datasets in the Cloud.  
+IEEE DataPort™ is a universally accessible web-based portal that serves four primary purposes: 
+(1)~Enable individuals and institutions to indefinitely store and make datasets easily accessible to a broad set of researchers, engineers and industry;  
+(2)~Enable researchers, engineers and industry to gain access to datasets that can be analyzed to advance technology;
+(3)~Facilitate data analysis by enabling access to data in the AWS Cloud and by enabling the downloading of datasets
+(4)~Supports reproducible research.
+\end{quote}
+
+The description concludes with a link between the technology and IEEE's mission:
+\begin{quote}
+IEEE DataPort™ is an online data platform created and supported by IEEE and supports IEEE’s overall mission of Advancing Technology for Humanity.  
+\end{quote}
+This humanitarian connection is relevant, and we consider it a cornerstone of reproducibility.
+We go back to it in Section~\ref{Sec:Ownership}.
+
 
 \subsection{GRSS Code Library}
 
@@ -207,7 +238,7 @@ The first requisite for being considered a RSRR is associating the manuscript to
 		\item Title
 		\item Contact: the corresponding author
 		\item Abstract
-		\item PDFs of relevant versions, including information of its submission to repositories (arXiv, etc.), journal or conference
+		\item PDFs of relevant versions, including information of its submission to repositories (arXiv, IEEE~TechRiv, 			etc.), journal or conference
 		\item\label{item:SourceDocumentFiles} \LaTeX\ and \BibTeX\ files, images, and plots
 	\end{enumerate}
 	\item\label{item:Platform} Computational platform (machine, model, operating system, software, libraries, and versions)
@@ -337,7 +368,7 @@ Some of the direct benefits for papers published under the RSRR Badge are:
 
 The work by Santana-Cedr\'es et al~\cite{DespecklingPolSARImageswithaStructureTensorFilter2019}, for instance, qualifies for a Remote Sensing Partially Reproducible Research.
 
-As authors' obligation, a pre-requisite to obtain the badge is the acknowledgement that the paper is reproducible in all the terms for a period of at least five years.
+As authors' obligation, a pre-requisite to obtain the badge is the acknowledgement that the paper is reproducible in all the terms for a period of at least five years, and that the material has permanent and global identifiers, e.g., DOIs.
 
 \section{Tools}
 
@@ -394,9 +425,9 @@ Every article should be in its own directory.
 Avoid using the name of the journal where you will submit your work for the directory and document names, as the destination may change along the process.
 
 Data, figures, images and code should be common to all projects, as one typically reuses them.
-Inform in your \LaTeX\ code the source of each figure, for instance with a comment of the form \texttt{\%\%\% The source is in /Figures/DrawIO/DirectoryStructure.drawio}.
+Inform in your \LaTeX\ code the source of each figure, for instance with a comment of the form \texttt{\%\%\% The source is in ../../Figures/DrawIO/DirectoryStructure.drawio}.
 This will help the review process, and the communication between authors. 
-The use of relative paths  for \LaTeX\  is strictly required, e.g., \texttt{../../more-path/figures}, and \texttt{../../more-path/video\_demos}. 
+All references to source files must use relative paths, e.g., \texttt{../../more-path/figures}, and \texttt{../../more-path/video\_demos}. 
 This applies also to codes (\texttt{../../more-path/my\_personal\_library}).
 
 
@@ -421,7 +452,7 @@ It organizes conversations in channels, connects with other applications (Google
 
 We have stressed the importance of using a Kanban-style management method for building a project~\cite{SuccessfulScientificPublishingfromtheProjecttotheAdvertising}.
 Such method is also recommended for simple task management.
-Although a more sophisticated tool, such as ProjectLibre\footnote{\url{https://www.projectlibre.com/}} is highly advisable for projects which involve several participants, resources, deliverables, and deadlines, the process of organizing and maintaining a remote sensing reproducible project is usually well met by Trello\footnote{\url{https://trello.com/}}.
+Trello\footnote{\url{https://trello.com/}} usually meets well the needs of organizing and maintaining a Remote Sensing reproducible project, but a more sophisticated tool, such as ProjectLibre\footnote{\url{https://www.projectlibre.com/}} is highly advisable for projects which involve several participants, resources, deliverables, and deadlines.
 
 Fig.~\ref{Fig:ScientificCanvas} shows the structure of a Scientific Canvas in Trello, freely available at \url{https://trello.com/b/C747M1GX}.
 Cards are organized in lists, and lists in groups.
@@ -445,37 +476,54 @@ Such platforms may conspire against reproducibility, though.
 A fully reproducible process, if totally based on such a platform, must state step-by-step the procedure.
 For this reason, it is advisable to prefer software that allows coding.
 
-\subsection{Deep Learning}
+\subsection{Machine Learning}
 
-Deep learning in general, and CNNs -- Convolutional Neural Networks in particular, have seen lately an extraordinary increase in popularity in the Remote Sensing community~\cite{DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience}. 
+Machine learning in general, and CNNs -- Convolutional Neural Networks in particular, have seen lately an extraordinary increase in popularity in the Remote Sensing community~\cite{DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience}. 
 Any reproducible approach must pay special attention to what this so efficient machine learning approach is capable to get from data (specially from the Big Data).
+Isdahl and Gundersen~\cite{OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms}
 
 Some of the challenges that these studies pose for their reproducibility are random initialization, and the need of GPU resources. 
 
 \subsection{Culture}
 
-\subsubsection{Overhead and mindset}
+\subsubsection{Overhead}
 
-\subsubsection{Ownership and copyright}
+Most experienced researchers frown upon adhering to new practices, specially if they are already successful.
+It is worth noting that many scientific practices are changing, and adaptation is a sign of intelligence, if not requirement for survival.
+
+The learning curve of good reproducibility and replicability practices is not steep, and they can be adopted gradually.
+We have noticed that students and young researchers may be the drivers of this change which, once in place, facilitates high quality research.
+
+We, thus, consider that overhead is small, limited to the initial stage of the adoption of the practices, and that it returns in the form of better recognition and smoother work.
+
+\subsubsection{Ownership}\label{Sec:Ownership}
+
+The Universal Declaration of Human Rights\footnote{\url{https://www.un.org/en/universal-declaration-human-rights/}}, in its Article 27, states that
+\begin{quotation}
+	Everyone has the right freely to participate in the cultural life of the community, to enjoy the arts and to share in scientific advancement and its benefits.
+\end{quotation}
+
+
+
 
 	
 \section*{Acknowledgments}
 
 The authors would like to thank CNPq and Fapeal (Brazil) for partial support of this work.
 	
-\nocite{StatisticalAnalysesReproducibleResearch,%
-RRComputationalHarmonicAnalysis,%
-RREconometrics,%
-RRSignalProcessing,%
-AddressingNeedDataCodeSharingComputationalScience,%
-ReproducibleResearchinComputationalScience,%
-TenRulesReproducibleComputationalResearch,%
-AddressingNeedDataCodeSharingComputationalScience,
-SevenReasonsWhyaUsersGuidetoTransparencyandReproducibility,%
-OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms,%
-ReproducibilityofScientificResults2018,%
-ReproducibleResearchandGIScienceanEvaluationUsingAGILEConferencePapers,%
-TheStateofReproducibilityintheComputationalGeosciences}
+%\nocite{StatisticalAnalysesReproducibleResearch,%
+%RRComputationalHarmonicAnalysis,%
+%RREconometrics,%
+%RRSignalProcessing,%
+%AddressingNeedDataCodeSharingComputationalScience,%
+%ReproducibleResearchinComputationalScience,%
+%TenRulesReproducibleComputationalResearch,%
+%AddressingNeedDataCodeSharingComputationalScience,
+%SevenReasonsWhyaUsersGuidetoTransparencyandReproducibility,%
+%OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms,%
+%ReproducibilityofScientificResults2018,%
+%ReproducibleResearchandGIScienceanEvaluationUsingAGILEConferencePapers,%
+%TheStateofReproducibilityintheComputationalGeosciences}
 	
 \bibliographystyle{IEEEtran}
 \bibliography{../../Common/references}
