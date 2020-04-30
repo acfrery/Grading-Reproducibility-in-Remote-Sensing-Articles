@@ -149,7 +149,7 @@
 <font NAME="Times New Roman" SIZE="14"/>
 <icon BUILTIN="list"/>
 </node>
-<node CREATED="1588015788946" ID="ID_1990896941" MODIFIED="1588103986376" TEXT="Deep Learning">
+<node CREATED="1588015788946" ID="ID_1990896941" MODIFIED="1588270451749" TEXT="Machine Learning">
 <font NAME="Times New Roman" SIZE="14"/>
 <icon BUILTIN="bookmark"/>
 </node>
