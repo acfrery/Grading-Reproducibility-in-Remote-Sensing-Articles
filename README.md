@@ -10,24 +10,23 @@ The repository can be cloned, for contents and structure, or copied as a templat
 
 The directory structure is the following:
 <pre>
-.
-└── Repository
-    ├── Code
-    ├── Data
-    ├── Figures
-    │   ├── DrawIO
-    │   ├── FreeMind
-    │   ├── PDF
-    │   ├── PNG
-    │   └── tikz
-    ├── Images
-    ├── Outputs
-    │   ├── Results
-    │   └── Tests
-    └── Text
-        ├── Articles
-        │   └── RemSensRepResearch
-        │       └── Misc
-        └── Common
+./Repository
+├── Code
+├── Data
+├── Figures
+│   ├── DrawIO
+│   ├── FreeMind
+│   ├── PDF
+│   └── tikz
+├── Images
+│   └── PNG
+├── Outputs
+│   ├── Results
+│   └── Tests
+└── Text
+    ├── Articles
+    │   └── RemSensRepResearch
+    │       └── Misc
+    └── Common
 </pre>
 
