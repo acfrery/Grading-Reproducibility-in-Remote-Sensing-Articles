@@ -1,6 +1,7 @@
 # Proposal of a Badging System for Reproducibility and Replicability in Remote Sensing Research
-## Authors: Alejandro C. Frery, Luis Gomez, Antonio C. Medeiros
+## Authors: [Alejandro C. Frery](acfrery@laccan.ufal.br), [Luis Gomez](luis.gomez@ulpgc.es), [Antonio C. Medeiros](antoniomedeiros@laccan.ufal.br)
 ### First submitted version: 30 April 2020
+
 Position Paper for the J-STARS Special Issue on Reproducible Research in Remote Sensing
 
 This repository contains a paper to be submitted to J-STARS. We present a proposal for a badging system that acknowledges reproducibility and replicability in Remote Sensing research reports.
