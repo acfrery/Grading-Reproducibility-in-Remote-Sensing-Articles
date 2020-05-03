@@ -4,7 +4,7 @@
 
 Position Paper for the J-STARS Special Issue on Reproducible Research in Remote Sensing
 
-This repository contains a paper to be submitted to J-STARS. We present a proposal for a badging system that acknowledges reproducibility and replicability in Remote Sensing research reports.
+This repository contains a paper submitted to the J-STARS (IEEE Journal of Selected Topics in Applied Earth Observations and Remote Sensing) Special Issue on Reproducibility Replicability in Remote Sensing Research. We present a proposal for a badging system that acknowledges reproducibility and replicability in Remote Sensing research reports.
 
 The repository can be cloned, for contents and structure, or copied as a template. This template implements the suggested structure for a reproducible research paper repository.
 
