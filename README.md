@@ -30,4 +30,4 @@ The directory structure is the following:
     └── Common
 </pre>
 
-[Table of References](TableOfReferences.html)
+[Table of References](./TableOfReferences.html)
