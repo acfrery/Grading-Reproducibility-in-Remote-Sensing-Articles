@@ -1,0 +1,863 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>JabRef references</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<script type="text/javascript">
+<!--
+// QuickSearch script for JabRef HTML export 
+// Version: 3.0
+//
+// Copyright (c) 2006-2011, Mark Schenk
+//
+// This software is distributed under a Creative Commons Attribution 3.0 License
+// http://creativecommons.org/licenses/by/3.0/
+//
+// Features:
+// - intuitive find-as-you-type searching
+//    ~ case insensitive
+//    ~ ignore diacritics (optional)
+//
+// - search with/without Regular Expressions
+// - match BibTeX key
+//
+
+// Search settings
+var searchAbstract = true;	// search in abstract
+var searchComment = true;	// search in comment
+
+var noSquiggles = true; 	// ignore diacritics when searching
+var searchRegExp = false; 	// enable RegExp searches
+
+
+if (window.addEventListener) {
+	window.addEventListener("load",initSearch,false); }
+else if (window.attachEvent) {
+	window.attachEvent("onload", initSearch); }
+
+function initSearch() {
+	// check for quick search table and searchfield
+	if (!document.getElementById('qs_table')||!document.getElementById('quicksearch')) { return; }
+
+	// load all the rows and sort into arrays
+	loadTableData();
+	
+	//find the query field
+	qsfield = document.getElementById('qs_field');
+
+	// previous search term; used for speed optimisation
+	prevSearch = '';
+
+	//find statistics location
+	stats = document.getElementById('stat');
+	setStatistics(-1);
+	
+	// set up preferences
+	initPreferences();
+
+	// shows the searchfield
+	document.getElementById('quicksearch').style.display = 'block';
+	document.getElementById('qs_field').onkeyup = quickSearch;
+}
+
+function loadTableData() {
+	// find table and appropriate rows
+	searchTable = document.getElementById('qs_table');
+	var allRows = searchTable.getElementsByTagName('tbody')[0].getElementsByTagName('tr');
+
+	// split all rows into entryRows and infoRows (e.g. abstract, comment, bibtex)
+	entryRows = new Array(); infoRows = new Array(); absRows = new Array(); revRows = new Array();
+
+	// get data from each row
+	entryRowsData = new Array(); absRowsData = new Array(); revRowsData = new Array(); 
+	
+	BibTeXKeys = new Array();
+	
+	for (var i=0, k=0, j=0; i<allRows.length;i++) {
+		if (allRows[i].className.match(/entry/)) {
+			entryRows[j] = allRows[i];
+			entryRowsData[j] = stripDiacritics(getTextContent(allRows[i]));
+			allRows[i].id ? BibTeXKeys[j] = allRows[i].id : allRows[i].id = 'autokey_'+j;
+			j ++;
+		} else {
+			infoRows[k++] = allRows[i];
+			// check for abstract/comment
+			if (allRows[i].className.match(/abstract/)) {
+				absRows.push(allRows[i]);
+				absRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			} else if (allRows[i].className.match(/comment/)) {
+				revRows.push(allRows[i]);
+				revRowsData[j-1] = stripDiacritics(getTextContent(allRows[i]));
+			}
+		}
+	}
+	//number of entries and rows
+	numEntries = entryRows.length;
+	numInfo = infoRows.length;
+	numAbs = absRows.length;
+	numRev = revRows.length;
+}
+
+function quickSearch(){
+	
+	tInput = qsfield;
+
+	if (tInput.value.length == 0) {
+		showAll();
+		setStatistics(-1);
+		qsfield.className = '';
+		return;
+	} else {
+		t = stripDiacritics(tInput.value);
+
+		if(!searchRegExp) { t = escapeRegExp(t); }
+			
+		// only search for valid RegExp
+		try {
+			textRegExp = new RegExp(t,"i");
+			closeAllInfo();
+			qsfield.className = '';
+		}
+			catch(err) {
+			prevSearch = tInput.value;
+			qsfield.className = 'invalidsearch';
+			return;
+		}
+	}
+	
+	// count number of hits
+	var hits = 0;
+
+	// start looping through all entry rows
+	for (var i = 0; cRow = entryRows[i]; i++){
+
+		// only show search the cells if it isn't already hidden OR if the search term is getting shorter, then search all
+		if(cRow.className.indexOf('noshow')==-1 || tInput.value.length <= prevSearch.length){
+			var found = false; 
+
+			if (entryRowsData[i].search(textRegExp) != -1 || BibTeXKeys[i].search(textRegExp) != -1){ 
+				found = true;
+			} else {
+				if(searchAbstract && absRowsData[i]!=undefined) {
+					if (absRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+				if(searchComment && revRowsData[i]!=undefined) {
+					if (revRowsData[i].search(textRegExp) != -1){ found=true; } 
+				}
+			}
+			
+			if (found){
+				cRow.className = 'entry show';
+				hits++;
+			} else {
+				cRow.className = 'entry noshow';
+			}
+		}
+	}
+
+	// update statistics
+	setStatistics(hits)
+	
+	// set previous search value
+	prevSearch = tInput.value;
+}
+
+
+// Strip Diacritics from text
+// http://stackoverflow.com/questions/990904/javascript-remove-accents-in-strings
+
+// String containing replacement characters for stripping accents 
+var stripstring = 
+    'AAAAAAACEEEEIIII'+
+    'DNOOOOO.OUUUUY..'+
+    'aaaaaaaceeeeiiii'+
+    'dnooooo.ouuuuy.y'+
+    'AaAaAaCcCcCcCcDd'+
+    'DdEeEeEeEeEeGgGg'+
+    'GgGgHhHhIiIiIiIi'+
+    'IiIiJjKkkLlLlLlL'+
+    'lJlNnNnNnnNnOoOo'+
+    'OoOoRrRrRrSsSsSs'+
+    'SsTtTtTtUuUuUuUu'+
+    'UuUuWwYyYZzZzZz.';
+
+function stripDiacritics(str){
+
+    if(noSquiggles==false){
+        return str;
+    }
+
+    var answer='';
+    for(var i=0;i<str.length;i++){
+        var ch=str[i];
+        var chindex=ch.charCodeAt(0)-192;   // Index of character code in the strip string
+        if(chindex>=0 && chindex<stripstring.length){
+            // Character is within our table, so we can strip the accent...
+            var outch=stripstring.charAt(chindex);
+            // ...unless it was shown as a '.'
+            if(outch!='.')ch=outch;
+        }
+        answer+=ch;
+    }
+    return answer;
+}
+
+// http://stackoverflow.com/questions/3446170/escape-string-for-use-in-javascript-regex
+// NOTE: must escape every \ in the export code because of the JabRef Export...
+function escapeRegExp(str) {
+  return str.replace(/[-\[\]\/\{\}\(\)\*\+\?\.\\\^\$\|]/g, "\\$&");
+}
+
+function toggleInfo(articleid,info) {
+
+	var entry = document.getElementById(articleid);
+	var abs = document.getElementById('abs_'+articleid);
+	var rev = document.getElementById('rev_'+articleid);
+	var bib = document.getElementById('bib_'+articleid);
+	
+	if (abs && info == 'abstract') {
+		abs.className.indexOf('noshow') == -1?abs.className = 'abstract noshow':abs.className = 'abstract show';
+	} else if (rev && info == 'comment') {
+		rev.className.indexOf('noshow') == -1?rev.className = 'comment noshow':rev.className = 'comment show';
+	} else if (bib && info == 'bibtex') {
+		bib.className.indexOf('noshow') == -1?bib.className = 'bibtex noshow':bib.className = 'bibtex show';
+	} else { 
+		return;
+	}
+
+	// check if one or the other is available
+	var revshow; var absshow; var bibshow;
+	(abs && abs.className.indexOf('noshow') == -1)? absshow = true: absshow = false;
+	(rev && rev.className.indexOf('noshow') == -1)? revshow = true: revshow = false;	
+	(bib && bib.className.indexOf('noshow') == -1)? bibshow = true: bibshow = false;
+	
+	// highlight original entry
+	if(entry) {
+		if (revshow || absshow || bibshow) {
+		entry.className = 'entry highlight show';
+		} else {
+		entry.className = 'entry show';
+		}
+	}
+	
+	// When there's a combination of abstract/comment/bibtex showing, need to add class for correct styling
+	if(absshow) {
+		(revshow||bibshow)?abs.className = 'abstract nextshow':abs.className = 'abstract';
+	} 
+	if (revshow) {
+		bibshow?rev.className = 'comment nextshow': rev.className = 'comment';
+	}	
+	
+}
+
+function setStatistics (hits) {
+	if(hits < 0) { hits=numEntries; }
+	if(stats) { stats.firstChild.data = hits + '/' + numEntries}
+}
+
+function getTextContent(node) {
+	// Function written by Arve Bersvendsen
+	// http://www.virtuelvis.com
+	
+	if (node.nodeType == 3) {
+	return node.nodeValue;
+	} // text node
+	if (node.nodeType == 1 && node.className != "infolinks") { // element node
+	var text = [];
+	for (var chld = node.firstChild;chld;chld=chld.nextSibling) {
+		text.push(getTextContent(chld));
+	}
+	return text.join("");
+	} return ""; // some other node, won't contain text nodes.
+}
+
+function showAll(){
+	closeAllInfo();
+	for (var i = 0; i < numEntries; i++){ entryRows[i].className = 'entry show'; }
+}
+
+function closeAllInfo(){
+	for (var i=0; i < numInfo; i++){
+		if (infoRows[i].className.indexOf('noshow') ==-1) {
+			infoRows[i].className = infoRows[i].className + ' noshow';
+		}
+	}
+}
+
+function clearQS() {
+	qsfield.value = '';
+	showAll();
+}
+
+function redoQS(){
+	showAll();
+	quickSearch(qsfield);
+}
+
+function updateSetting(obj){
+	var option = obj.id;
+	var checked = obj.value;
+
+	switch(option)
+	 {
+	 case "opt_searchAbs":
+	   searchAbstract=!searchAbstract;
+	   redoQS();
+	   break;
+	 case "opt_searchRev":
+	   searchComment=!searchComment;
+	   redoQS();
+	   break;
+	 case "opt_useRegExp":
+	   searchRegExp=!searchRegExp;
+	   redoQS();
+	   break;
+	 case "opt_noAccents":
+	   noSquiggles=!noSquiggles;
+	   loadTableData();
+	   redoQS();
+	   break;
+	 }
+}
+
+function initPreferences(){
+	if(searchAbstract){document.getElementById("opt_searchAbs").checked = true;}
+	if(searchComment){document.getElementById("opt_searchRev").checked = true;}
+	if(noSquiggles){document.getElementById("opt_noAccents").checked = true;}
+	if(searchRegExp){document.getElementById("opt_useRegExp").checked = true;}
+	
+	if(numAbs==0) {document.getElementById("opt_searchAbs").parentNode.style.display = 'none';}
+	if(numRev==0) {document.getElementById("opt_searchRev").parentNode.style.display = 'none';}
+}
+
+function toggleSettings(){
+	var togglebutton = document.getElementById('showsettings');
+	var settings = document.getElementById('settings');
+	
+	if(settings.className == "hidden"){
+		settings.className = "show";
+		togglebutton.innerText = "close settings";
+		togglebutton.textContent = "close settings";
+	}else{
+		settings.className = "hidden";
+		togglebutton.innerText = "settings...";		
+		togglebutton.textContent = "settings...";
+	}
+}
+
+-->
+</script>
+<style type="text/css">
+body { background-color: white; font-family: Arial, sans-serif; font-size: 13px; line-height: 1.2; padding: 1em; color: #2E2E2E; margin: auto 2em; }
+
+form#quicksearch { width: auto; border-style: solid; border-color: gray; border-width: 1px 0px; padding: 0.7em 0.5em; display:none; position:relative; }
+span#searchstat {padding-left: 1em;}
+
+div#settings { margin-top:0.7em; /* border-bottom: 1px transparent solid; background-color: #efefef; border: 1px grey solid; */ }
+div#settings ul {margin: 0; padding: 0; }
+div#settings li {margin: 0; padding: 0 1em 0 0; display: inline; list-style: none; }
+div#settings li + li { border-left: 2px #efefef solid; padding-left: 0.5em;}
+div#settings input { margin-bottom: 0px;}
+
+div#settings.hidden {display:none;}
+
+#showsettings { border: 1px grey solid; padding: 0 0.5em; float:right; line-height: 1.6em; text-align: right; }
+#showsettings:hover { cursor: pointer; }
+
+.invalidsearch { background-color: red; }
+input[type="button"] { background-color: #efefef; border: 1px #2E2E2E solid;}
+
+table { width: 100%; empty-cells: show; border-spacing: 0em 0.2em; margin: 1em 0em; border-style: none; }
+th, td { border: 1px gray solid; border-width: 1px 1px; padding: 0.5em; vertical-align: top; text-align: left; }
+th { background-color: #efefef; }
+td + td, th + th { border-left: none; }
+
+td a { color: navy; text-decoration: none; }
+td a:hover  { text-decoration: underline; }
+
+tr.noshow { display: none;}
+tr.highlight td { background-color: #EFEFEF; border-top: 2px #2E2E2E solid; font-weight: bold; }
+tr.abstract td, tr.comment td, tr.bibtex td { background-color: #EFEFEF; text-align: justify; border-bottom: 2px #2E2E2E solid; }
+tr.nextshow td { border-bottom: 1px gray solid; }
+
+tr.bibtex pre { width: 100%; overflow: auto; white-space: pre-wrap;}
+p.infolinks { margin: 0.3em 0em 0em 0em; padding: 0px; }
+
+@media print {
+	p.infolinks, #qs_settings, #quicksearch, t.bibtex { display: none !important; }
+	tr { page-break-inside: avoid; }
+}
+</style>
+</head>
+<body>
+
+<form action="" id="quicksearch">
+<input type="text" id="qs_field" autocomplete="off" placeholder="Type to search..." /> <input type="button" onclick="clearQS()" value="clear" />
+<span id="searchstat">Matching entries: <span id="stat">0</span></span>
+<div id="showsettings" onclick="toggleSettings()">settings...</div>
+<div id="settings" class="hidden">
+<ul>
+<li><input type="checkbox" class="search_setting" id="opt_searchAbs" onchange="updateSetting(this)"><label for="opt_searchAbs"> include abstract</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_searchRev" onchange="updateSetting(this)"><label for="opt_searchRev"> include comment</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_useRegExp" onchange="updateSetting(this)"><label for="opt_useRegExp"> use RegExp</label></li>
+<li><input type="checkbox" class="search_setting" id="opt_noAccents" onchange="updateSetting(this)"><label for="opt_noAccents"> ignore accents</label></li>
+</ul>
+</div>
+</form>
+<table id="qs_table" border="1">
+<thead><tr><th width="20%">Author</th><th width="30%">Title</th><th width="5%">Year</th><th width="30%">Journal/Proceedings</th><th width="10%">Reftype</th><th width="5%">DOI/URL</th></tr></thead>
+<tbody><tr id="ManifestoReproducibleScience" class="entry">
+	<td>Munaf&ograve;, M.R., Nosek, B.A., Bishop, D.V.M., Button, K.S., Chambers, C.D., du Sert, N.P., Simonsohn, U., Wagenmakers, E.-J., Ware, J.J. and Ioannidis, J.P.A.</td>
+	<td>A manifesto for reproducible science <p class="infolinks">[<a href="javascript:toggleInfo('ManifestoReproducibleScience','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('ManifestoReproducibleScience','bibtex')">BibTeX</a>]</p></td>
+	<td>2017</td>
+	<td>Nature Human Behaviour<br/>Vol. 1(1), pp. 0021&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1038/s41562-016-0021">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_ManifestoReproducibleScience" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Improving the reliability and efficiency of scientific research will increase the credibility of the published scientific literature and accelerate discovery. Here we argue for the adoption of measures to optimize key elements of the scientific process: methods, reporting and dissemination, reproducibility, evaluation and incentives. There is some evidence from both simulations and empirical studies supporting the likely effectiveness of these measures, but their broad adoption by researchers, institutions, funders and journals will require iterative evaluation and improvement. We discuss the goals of these measures, and how they can be implemented, in the hope that this will facilitate action toward improving the transparency, reproducibility and efficiency of scientific research.</td>
+</tr>
+<tr id="bib_ManifestoReproducibleScience" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{ManifestoReproducibleScience,
+  author = {M. R. Munaf&ograve; and B. A. Nosek and D. V. M. Bishop and K. S. Button and C. D. Chambers and N. Percie du Sert and U. Simonsohn and E.-J. Wagenmakers and J. J. Ware and J. P. A. Ioannidis},
+  title = {A manifesto for reproducible science},
+  journal = {Nature Human Behaviour},
+  publisher = {Springer Nature},
+  year = {2017},
+  volume = {1},
+  number = {1},
+  pages = {0021},
+  doi = {https://doi.org/10.1038/s41562-016-0021}
+}
+</pre></td>
+</tr>
+<tr id="osterwalder2010business" class="entry">
+	<td>Osterwalder, A. and Pigneur, Y.</td>
+	<td>Business model generation: a handbook for visionaries, game changers, and challengers <p class="infolinks">[<a href="javascript:toggleInfo('osterwalder2010business','bibtex')">BibTeX</a>]</p></td>
+	<td>2010</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_osterwalder2010business" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@book{osterwalder2010business,
+  author = {Osterwalder, Alexander and Pigneur, Yves},
+  title = {Business model generation: a handbook for visionaries, game changers, and challengers},
+  publisher = {John Wiley &amp; Sons},
+  year = {2010}
+}
+</pre></td>
+</tr>
+<tr id="DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience" class="entry">
+	<td>Reichstein, M., Camps-Valls, G., Stevens, B., Jung, M., Denzler, J., Carvalhais, N. and Prabhat</td>
+	<td>Deep learning and process understanding for data-driven Earth system science <p class="infolinks">[<a href="javascript:toggleInfo('DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience','bibtex')">BibTeX</a>]</p></td>
+	<td>2019</td>
+	<td>Nature<br/>Vol. 566(7743), pp. 195-204&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1038/s41586-019-0912-1">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Machine learning approaches are increasingly used to extract patterns and insights from the ever-increasing stream of geospatial data, but current approaches may not be optimal when system behaviour is dominated by spatial or temporal context. Here, rather than amending classical machine learning, we argue that these contextual cues should be used as part of deep learning (an approach that is able to extract spatio-temporal features automatically) to gain further process understanding of Earth system science problems, improving the predictive ability of seasonal forecasting and modelling of long-range spatial connections across multiple timescales, for example. The next step will be a hybrid modelling approach, coupling physical process models with the versatility of data-driven machine learning.</td>
+</tr>
+<tr id="bib_DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience,
+  author = {Markus Reichstein and Gustau Camps-Valls and Bjorn Stevens and Martin Jung and Joachim Denzler and Nuno Carvalhais and Prabhat},
+  title = {Deep learning and process understanding for data-driven Earth system science},
+  journal = {Nature},
+  publisher = {Springer Science and Business Media LLC},
+  year = {2019},
+  volume = {566},
+  number = {7743},
+  pages = {195--204},
+  doi = {https://doi.org/10.1038/s41586-019-0912-1}
+}
+</pre></td>
+</tr>
+<tr id="DespecklingPolSARImageswithaStructureTensorFilter2019" class="entry">
+	<td>Santana-Cedr&eacute;s, D., Gomez, L., Alvarez, L. and Frery, A.C.</td>
+	<td>Despeckling PolSAR Images with a Structure Tensor Filter <p class="infolinks">[<a href="javascript:toggleInfo('DespecklingPolSARImageswithaStructureTensorFilter2019','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('DespecklingPolSARImageswithaStructureTensorFilter2019','bibtex')">BibTeX</a>]</p></td>
+	<td>2020</td>
+	<td>IEEE Geoscience and Remote Sensing Letters<br/>Vol. 17(2), pp. 357-361&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1109/LGRS.2019.2919452">DOI</a> <a href="http://ctim.ulpgc.es/demo111/">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_DespecklingPolSARImageswithaStructureTensorFilter2019" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: In this letter, we propose a new despeckling filter for fully polarimetric synthetic aperture radar (PolSAR) images defined by 3×3 complex Wishart distributions. We first generalize the well-known structure tensor to deal with PolSAR data which allows to efficiently measure the dominant direction and contrast of edges. The generalization includes stochastic distances defined in the space of the Wishart matrices. Then, we embed the formulation into an anisotropic diffusion-like schema to build a filter able to reduce speckle and preserve edges. We evaluate its performance through an innovative experimental setup that also includes Monte Carlo analysis. We compare the results with a state-of-the-art polarimetric filter.</td>
+</tr>
+<tr id="bib_DespecklingPolSARImageswithaStructureTensorFilter2019" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{DespecklingPolSARImageswithaStructureTensorFilter2019,
+  author = {D. Santana-Cedr&eacute;s and L. Gomez and L. Alvarez and A. C. Frery},
+  title = {Despeckling PolSAR Images with a Structure Tensor Filter},
+  journal = {IEEE Geoscience and Remote Sensing Letters},
+  year = {2020},
+  volume = {17},
+  number = {2},
+  pages = {357--361},
+  url = {http://ctim.ulpgc.es/demo111/},
+  doi = {https://doi.org/10.1109/LGRS.2019.2919452}
+}
+</pre></td>
+</tr>
+<tr id="EditorialGRSL2015" class="entry">
+	<td>Frery, A.C.</td>
+	<td>How To Successfully Make a Scientific Contribution Through IEEE Geoscience and Remote Sensing Letters <p class="infolinks">[<a href="javascript:toggleInfo('EditorialGRSL2015','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('EditorialGRSL2015','bibtex')">BibTeX</a>]</p></td>
+	<td>2015</td>
+	<td>IEEE Geoscience and Remote Sensing Letters<br/>Vol. 12(6), pp. 1167-1169&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1109/LGRS.2015.2404211">DOI</a> <a href="http://www.grss-ieee.org/publications/letters/submission-hints/">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_EditorialGRSL2015" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: After more than a year of serving as Editor-in-Chief, I have collected impressions from authors, reviewers, and Associate Editors about certain patterns that lead to having manuscripts accepted. This Editorial aims at sharing these impressions.</td>
+</tr>
+<tr id="bib_EditorialGRSL2015" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{EditorialGRSL2015,
+  author = {A. C. Frery},
+  title = {How To Successfully Make a Scientific Contribution Through IEEE Geoscience and Remote Sensing Letters},
+  journal = {IEEE Geoscience and Remote Sensing Letters},
+  year = {2015},
+  volume = {12},
+  number = {6},
+  pages = {1167--1169},
+  url = {http://www.grss-ieee.org/publications/letters/submission-hints/},
+  doi = {https://doi.org/10.1109/LGRS.2015.2404211}
+}
+</pre></td>
+</tr>
+<tr id="IPOL" class="entry">
+	<td></td>
+	<td>Image Processing On Line <p class="infolinks">[<a href="javascript:toggleInfo('IPOL','bibtex')">BibTeX</a>]</p></td>
+	<td></td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td><a href="https://doi.org/10.5201/ipol">DOI</a> <a href="http://www.ipol.im/">URL</a>&nbsp;</td>
+</tr>
+<tr id="bib_IPOL" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{IPOL,,
+  title = {Image Processing On Line},
+  url = {http://www.ipol.im/},
+  doi = {https://doi.org/10.5201/ipol}
+}
+</pre></td>
+</tr>
+<tr id="LetterNewton" class="entry">
+	<td>Newton, I. and Hooke, R.</td>
+	<td>Isaac Newton letter to Robert Hooke <p class="infolinks">[<a href="javascript:toggleInfo('LetterNewton','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('LetterNewton','bibtex')">BibTeX</a>]</p></td>
+	<td>1675</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td><a href="https://digitallibrary.hsp.org/index.php/Detail/objects/9792">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_LetterNewton" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Letter from Isaac Newton to Robert Hooke from early in their harried correspondence. Newton here accepts Hooke's invitation for a private correspondence and a sort of collaboration, noting that "what is done before many witnesses is seldom without some further concern than that for truth: but what passes between friends in private usually deserves the name of consultation rather than contest." Newton also asks Hooke for critiques of his papers assuring him that, "I am not so much in love with philosophical productions but oft I can make them yield to equity and friendship."</td>
+</tr>
+<tr id="bib_LetterNewton" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{LetterNewton,
+  author = {Isaac Newton and Robert Hooke},
+  title = {Isaac Newton letter to Robert Hooke},
+  year = {1675},
+  url = {https://digitallibrary.hsp.org/index.php/Detail/objects/9792}
+}
+</pre></td>
+</tr>
+<tr id="OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms" class="entry">
+	<td>Isdahl, R. and Gundersen, O.E.</td>
+	<td>Out-of-the-Box Reproducibility: A Survey of Machine Learning Platforms <p class="infolinks">[<a href="javascript:toggleInfo('OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms','bibtex')">BibTeX</a>]</p></td>
+	<td>2019</td>
+	<td>2019 15th International Conference on eScience (eScience)&nbsp;</td>
+	<td>inproceedings</td>
+	<td><a href="https://doi.org/10.1109/escience.2019.00017">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Even machine learning experiments that are fully conducted on computers are not necessarily reproducible. An increasing number of open source and commercial, closed source machine learning platforms are being developed that help address this problem. However, there is no standard for assessing and comparing which features are required to fully support reproducibility. We propose a quantitative method that alleviates this problem. Based on the proposed method we assess and compare the current state of the art machine learning platforms for how well they support making empirical results reproducible. Our results show that BEAT and Floydhub have the best support for reproducibility with Codalab and Kaggle as close contenders. The most commonly used machine learning platforms provided by the big tech companies have poor support for reproducibility.</td>
+</tr>
+<tr id="bib_OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@inproceedings{OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms,
+  author = {Richard Isdahl and Odd Erik Gundersen},
+  title = {Out-of-the-Box Reproducibility: A Survey of Machine Learning Platforms},
+  booktitle = {2019 15th International Conference on eScience (eScience)},
+  publisher = {IEEE},
+  year = {2019},
+  doi = {https://doi.org/10.1109/escience.2019.00017}
+}
+</pre></td>
+</tr>
+<tr id="PraxisofReproducibleComputationalScience" class="entry">
+	<td>Barba, L.A.</td>
+	<td>Praxis of Reproducible Computational Science <p class="infolinks">[<a href="javascript:toggleInfo('PraxisofReproducibleComputationalScience','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('PraxisofReproducibleComputationalScience','bibtex')">BibTeX</a>]</p></td>
+	<td>2019</td>
+	<td>Computing in Science &amp; Engineering<br/>Vol. 21(1), pp. 73-78&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1109/mcse.2018.2881905">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_PraxisofReproducibleComputationalScience" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Among the top challenges of reproducible computational science are the following: 1) creation, curation, usage, and publication of research software; 2) acceptance, adoption, and standardization of open-science practices; and 3) misalignment with academic incentive structures and institutional processes for career progression. I will mainly address the first two here, proposing a praxis of reproducible computational science.</td>
+</tr>
+<tr id="bib_PraxisofReproducibleComputationalScience" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{PraxisofReproducibleComputationalScience,
+  author = {Lorena A. Barba},
+  title = {Praxis of Reproducible Computational Science},
+  journal = {Computing in Science &amp; Engineering},
+  publisher = {Institute of Electrical and Electronics Engineers (IEEE)},
+  year = {2019},
+  volume = {21},
+  number = {1},
+  pages = {73--78},
+  doi = {https://doi.org/10.1109/mcse.2018.2881905}
+}
+</pre></td>
+</tr>
+<tr id="PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication" class="entry">
+	<td>Konkol, M., N&uuml;st, D. and Goulier, L.</td>
+	<td>Publishing computational research -- A review of infrastructures for reproducible and transparent scholarly communication <p class="infolinks">[<a href="javascript:toggleInfo('PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication','bibtex')">BibTeX</a>]</p></td>
+	<td>2020</td>
+	<td>&nbsp;</td>
+	<td>unpublished</td>
+	<td><a href="http://arxiv.org/pdf/2001.00484v1">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Funding agencies increasingly ask applicants to include data and software management plans into proposals. In addition, the author guidelines of scientific journals and conferences more often include a statement on data availability, and some reviewers reject unreproducible submissions. This trend towards open science increases the pressure on authors to provide access to the source code and data underlying the computational results in their scientific papers. Still, publishing reproducible articles is a demanding task and not achieved simply by providing access to code scripts and data files. Consequently, several projects develop solutions to support the publication of executable analyses alongside articles considering the needs of the aforementioned stakeholders. The key contribution of this paper is a review of applications addressing the issue of publishing executable computational research results. We compare the approaches across properties relevant for the involved stakeholders, e.g., provided features and deployment options, and also critically discuss trends and limitations. The review can support publishers to decide which system to integrate into their submission process, editors to recommend tools for researchers, and authors of scientific papers to adhere to reproducibility principles.</td>
+</tr>
+<tr id="bib_PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@unpublished{PublishingComputationalResearchaReviewofInfrastructuresforReproducibleandTransparentScholarlyCommunication,
+  author = {Markus Konkol and Daniel N&uuml;st and Laura Goulier},
+  title = {Publishing computational research -- A review of infrastructures for reproducible and transparent scholarly communication},
+  year = {2020},
+  url = {http://arxiv.org/pdf/2001.00484v1}
+}
+</pre></td>
+</tr>
+<tr id="ReproducibilityofScientificResults2018" class="entry">
+	<td>Fidler, F. and Wilcox, J.</td>
+	<td>Reproducibility of Scientific Results <p class="infolinks">[<a href="javascript:toggleInfo('ReproducibilityofScientificResults2018','bibtex')">BibTeX</a>]</p></td>
+	<td>2018</td>
+	<td>The Stanford Encyclopedia of Philosophy&nbsp;</td>
+	<td>incollection</td>
+	<td><a href="https://plato.stanford.edu/archives/win2018/entries/scientific-reproducibility/">URL</a>&nbsp;</td>
+</tr>
+<tr id="bib_ReproducibilityofScientificResults2018" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@incollection{ReproducibilityofScientificResults2018,
+  author = {Fidler, F. and Wilcox, J.},
+  title = {Reproducibility of Scientific Results},
+  booktitle = {The Stanford Encyclopedia of Philosophy},
+  publisher = {Metaphysics Research Lab, Stanford University},
+  year = {2018},
+  edition = {Winter 2018},
+  url = {https://plato.stanford.edu/archives/win2018/entries/scientific-reproducibility/}
+}
+</pre></td>
+</tr>
+<tr id="StatisticalAnalysesReproducibleResearch" class="entry">
+	<td>Gentleman, R. and Temple Lang, D.</td>
+	<td>Statistical Analyses and Reproducible Research <p class="infolinks">[<a href="javascript:toggleInfo('StatisticalAnalysesReproducibleResearch','bibtex')">BibTeX</a>]</p></td>
+	<td>2004</td>
+	<td>(Paper 2)<i>School</i>: Bioconductor Project&nbsp;</td>
+	<td>techreport</td>
+	<td><a href="http://www.bepress.com/bioconductor/paper2">URL</a>&nbsp;</td>
+</tr>
+<tr id="bib_StatisticalAnalysesReproducibleResearch" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@techreport{StatisticalAnalysesReproducibleResearch,
+  author = {R. Gentleman and D. Temple Lang},
+  title = {Statistical Analyses and Reproducible Research},
+  school = {Bioconductor Project},
+  year = {2004},
+  number = {Paper 2},
+  url = {http://www.bepress.com/bioconductor/paper2}
+}
+</pre></td>
+</tr>
+<tr id="SuccessfulScientificPublishingfromtheProjecttotheAdvertising" class="entry">
+	<td>Frery, A.C.</td>
+	<td>Successful scientific publishing: from the project to the advertising <p class="infolinks">[<a href="javascript:toggleInfo('SuccessfulScientificPublishingfromtheProjecttotheAdvertising','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('SuccessfulScientificPublishingfromtheProjecttotheAdvertising','bibtex')">BibTeX</a>]</p></td>
+	<td>2020</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td><a href="https://doi.org/10.13140/RG.2.2.20805.19687">DOI</a> <a href="https://ieeemeetings.webex.com/ieeemeetings/ldr.php?RCID=825b9854c01cd5f07190a96b50284234">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_SuccessfulScientificPublishingfromtheProjecttotheAdvertising" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: We review good scientific practices that may lead to more success and less stress of the active researcher. We will emphasize the importance of reproducibility in every step of the research process: from the conception and writing of the proposal to the publication and support of the results.</td>
+</tr>
+<tr id="bib_SuccessfulScientificPublishingfromtheProjecttotheAdvertising" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{SuccessfulScientificPublishingfromtheProjecttotheAdvertising,
+  author = {Frery, Alejandro C.},
+  title = {Successful scientific publishing: from the project to the advertising},
+  year = {2020},
+  url = {https://ieeemeetings.webex.com/ieeemeetings/ldr.php?RCID=825b9854c01cd5f07190a96b50284234},
+  doi = {https://doi.org/10.13140/RG.2.2.20805.19687}
+}
+</pre></td>
+</tr>
+<tr id="TellItlikeItIs" class="entry">
+	<td></td>
+	<td>Tell it like it is <p class="infolinks">[<a href="javascript:toggleInfo('TellItlikeItIs','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('TellItlikeItIs','bibtex')">BibTeX</a>]</p></td>
+	<td>2020</td>
+	<td>Nature Human Behaviour<br/>Vol. 4(1), pp. 1-1&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1038/s41562-020-0818-9">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_TellItlikeItIs" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Every research paper tells a story, but the pressure to provide ‘clean’ narratives is harmful for the scientific endeavour.</td>
+</tr>
+<tr id="bib_TellItlikeItIs" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{TellItlikeItIs,,
+  title = {Tell it like it is},
+  journal = {Nature Human Behaviour},
+  publisher = {Springer Science and Business Media LLC},
+  year = {2020},
+  volume = {4},
+  number = {1},
+  pages = {1--1},
+  doi = {https://doi.org/10.1038/s41562-020-0818-9}
+}
+</pre></td>
+</tr>
+<tr id="TerminologiesforReproducibleResearch" class="entry">
+	<td>Barba, L.A.</td>
+	<td>Terminologies for Reproducible Research <p class="infolinks">[<a href="javascript:toggleInfo('TerminologiesforReproducibleResearch','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('TerminologiesforReproducibleResearch','bibtex')">BibTeX</a>]</p></td>
+	<td>2018</td>
+	<td>&nbsp;</td>
+	<td>misc</td>
+	<td><a href="http://arxiv.org/pdf/1802.03311v1">URL</a>&nbsp;</td>
+</tr>
+<tr id="abs_TerminologiesforReproducibleResearch" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Reproducible research---by its many names---has come to be regarded as a key concern across disciplines and stakeholder groups. Funding agencies and journals, professional societies and even mass media are paying attention, often focusing on the so-called "crisis" of reproducibility. One big problem keeps coming up among those seeking to tackle the issue: different groups are using terminologies in utter contradiction with each other. Looking at a broad sample of publications in different fields, we can classify their terminology via decision tree: they either, A---make no distinction between the words reproduce and replicate, or B---use them distinctly. If B, then they are commonly divided in two camps. In a spectrum of concerns that starts at a minimum standard of "same data+same methods=same results," to "new data and/or new methods in an independent study=same findings," group 1 calls the minimum standard reproduce, while group 2 calls it replicate. This direct swap of the two terms aggravates an already weighty issue. By attempting to inventory the terminologies across disciplines, I hope that some patterns will emerge to help us resolve the contradictions.</td>
+</tr>
+<tr id="bib_TerminologiesforReproducibleResearch" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@misc{TerminologiesforReproducibleResearch,
+  author = {Lorena A. Barba},
+  title = {Terminologies for Reproducible Research},
+  year = {2018},
+  url = {http://arxiv.org/pdf/1802.03311v1}
+}
+</pre></td>
+</tr>
+<tr id="TheLegalFrameworkforReproducibleScientificResearchLicensingandCopyright" class="entry">
+	<td>Stodden, V.</td>
+	<td>The Legal Framework for Reproducible Scientific Research: Licensing and Copyright <p class="infolinks">[<a href="javascript:toggleInfo('TheLegalFrameworkforReproducibleScientificResearchLicensingandCopyright','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('TheLegalFrameworkforReproducibleScientificResearchLicensingandCopyright','bibtex')">BibTeX</a>]</p></td>
+	<td>2009</td>
+	<td>Computing in Science &amp; Engineering<br/>Vol. 11(1), pp. 35-40&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1109/mcse.2009.19">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_TheLegalFrameworkforReproducibleScientificResearchLicensingandCopyright" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: As computational researchers increasingly make their results available in a reproducible way, and often outside the traditional journal publishing mechanism, questions naturally arise with regard to copyright, subsequent use and citation, and ownership rights in general. The growing number of scientists who release their research publicly face a gap in the current licensing and copyright structure, particularly on the Internet. Scientific research produces more than the final paper: The code, data structures, experimental design and parameters, documentation, and figures are all important for scholarship communication and result replication. The author proposes the reproducible research standard for scientific researchers to use for all components of their scholarship that should encourage reproducible scientific investigation through attribution, facilitate greater collaboration, and promote engagement of the larger community in scientific learning and discovery.</td>
+</tr>
+<tr id="bib_TheLegalFrameworkforReproducibleScientificResearchLicensingandCopyright" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{TheLegalFrameworkforReproducibleScientificResearchLicensingandCopyright,
+  author = {Victoria Stodden},
+  title = {The Legal Framework for Reproducible Scientific Research: Licensing and Copyright},
+  journal = {Computing in Science &amp; Engineering},
+  publisher = {Institute of Electrical and Electronics Engineers (IEEE)},
+  year = {2009},
+  volume = {11},
+  number = {1},
+  pages = {35--40},
+  doi = {https://doi.org/10.1109/mcse.2009.19}
+}
+</pre></td>
+</tr>
+<tr id="TowardsaMethodologyforDevelopingEvidenceInformedManagementKnowledgebyMeansofSystematicReview" class="entry">
+	<td>Tranfield, D., Denyer, D. and Smart, P.</td>
+	<td>Towards a Methodology for Developing Evidence-Informed Management Knowledge by Means of Systematic Review <p class="infolinks">[<a href="javascript:toggleInfo('TowardsaMethodologyforDevelopingEvidenceInformedManagementKnowledgebyMeansofSystematicReview','abstract')">Abstract</a>] [<a href="javascript:toggleInfo('TowardsaMethodologyforDevelopingEvidenceInformedManagementKnowledgebyMeansofSystematicReview','bibtex')">BibTeX</a>]</p></td>
+	<td>2003</td>
+	<td>British Journal of Management<br/>Vol. 14(3), pp. 207-222&nbsp;</td>
+	<td>article</td>
+	<td><a href="https://doi.org/10.1111/1467-8551.00375">DOI</a> &nbsp;</td>
+</tr>
+<tr id="abs_TowardsaMethodologyforDevelopingEvidenceInformedManagementKnowledgebyMeansofSystematicReview" class="abstract noshow">
+	<td colspan="6"><b>Abstract</b>: Undertaking a review of the literature is an important part of any research project. The researcher both maps and assesses the relevant intellectual territory in order to specify a research question which will further develop the knowledge base. However, traditional ‘narrative’ reviews frequently lack thoroughness, and in many cases are not undertaken as genuine pieces of investigatory science. Consequently they can lack a means for making sense of what the collection of studies is saying. These reviews can be biased by the researcher and often lack rigour. Furthermore, the use of reviews of the available evidence to provide insights and guidance for intervention into operational needs of practitioners and policymakers has largely been of secondary importance. For practitioners, making sense of a mass of often‐contradictory evidence has become progressively harder. The quality of evidence underpinning decision‐making and action has been questioned, for inadequate or incomplete evidence seriously impedes policy formulation and implementation. In exploring ways in which evidence‐informed management reviews might be achieved, the authors evaluate the process of systematic review used in the medical sciences. Over the last fifteen years, medical science has attempted to improve the review process by synthesizing research in a systematic, transparent, and reproducible manner with the twin aims of enhancing the knowledge base and informing policymaking and practice. This paper evaluates the extent to which the process of systematic review can be applied to the management field in order to produce a reliable knowledge stock and enhanced practice by developing context‐sensitive research. The paper highlights the challenges in developing an appropriate methodology.</td>
+</tr>
+<tr id="bib_TowardsaMethodologyforDevelopingEvidenceInformedManagementKnowledgebyMeansofSystematicReview" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@article{TowardsaMethodologyforDevelopingEvidenceInformedManagementKnowledgebyMeansofSystematicReview,
+  author = {David Tranfield and David Denyer and Palminder Smart},
+  title = {Towards a Methodology for Developing Evidence-Informed Management Knowledge by Means of Systematic Review},
+  journal = {British Journal of Management},
+  publisher = {Wiley},
+  year = {2003},
+  volume = {14},
+  number = {3},
+  pages = {207--222},
+  doi = {https://doi.org/10.1111/1467-8551.00375}
+}
+</pre></td>
+</tr>
+<tr id="WritingforComputerScience" class="entry">
+	<td>Zobel, J.</td>
+	<td>Writing for Computer Science <p class="infolinks">[<a href="javascript:toggleInfo('WritingforComputerScience','bibtex')">BibTeX</a>]</p></td>
+	<td>2005</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_WritingforComputerScience" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@book{WritingforComputerScience,
+  author = {J. Zobel},
+  title = {Writing for Computer Science},
+  publisher = {Springer},
+  year = {2005},
+  edition = {2}
+}
+</pre></td>
+</tr>
+<tr id="WritingScientificSoftware" class="entry">
+	<td>Oliveira, S. and Stewart, D.</td>
+	<td>Writing Scientific Software: a guide to good style <p class="infolinks">[<a href="javascript:toggleInfo('WritingScientificSoftware','bibtex')">BibTeX</a>]</p></td>
+	<td>2006</td>
+	<td>&nbsp;</td>
+	<td>book</td>
+	<td>&nbsp;</td>
+</tr>
+<tr id="bib_WritingScientificSoftware" class="bibtex noshow">
+<td colspan="6"><b>BibTeX</b>:
+<pre>
+@book{WritingScientificSoftware,
+  author = {S. Oliveira and D. Stewart},
+  title = {Writing Scientific Software: a guide to good style},
+  publisher = {Cambridge},
+  year = {2006}
+}
+</pre></td>
+</tr>
+</tbody>
+</table>
+<footer>
+ <small>Created by <a href="http://jabref.sourceforge.net">JabRef</a> on 03/05/2020.</small>
+</footer>
+<!-- file generated by JabRef -->
+</body>
+</html>
