@@ -1,5 +1,5 @@
 # Proposal of a Badging System for Reproducibility and Replicability in Remote Sensing Research
-## Authors: [Alejandro C. Frery](mailto:acfrery@laccan.ufal.br), [Luis Gomez](mailto:luis.gomez@ulpgc.es), [Antonio C. Medeiros](mailto:antoniomedeiros@laccan.ufal.br)
+## Authors: Alejandro C. Frery, Luis Gomez, Antonio C. Medeiros
 ### First submitted version: 30 April 2020
 
 Position Paper for the J-STARS Special Issue on Reproducible Research in Remote Sensing
@@ -29,5 +29,7 @@ The directory structure is the following:
     │       └── Misc
     └── Common
 </pre>
+
+Contacts: [Alejandro C. Frery](mailto:acfrery@laccan.ufal.br), [Luis Gomez](mailto:luis.gomez@ulpgc.es), [Antonio C. Medeiros](mailto:antoniomedeiros@laccan.ufal.br)
 
 [Table of References](./TableOfReferences.html)
