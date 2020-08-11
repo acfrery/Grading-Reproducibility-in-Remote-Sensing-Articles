@@ -2,7 +2,7 @@
 
 \usepackage{texnames}
 \usepackage{graphicx}
-\graphicspath{{../../../Figures/PDF/}{../../../Images/PNG/}}
+\graphicspath{{../../../Figures/PDF/}{../../../Images/PNG/}{../../../Images/JPG/}}
 \DeclareGraphicsExtensions{.pdf,.png}
 
 \usepackage{color}
@@ -17,14 +17,14 @@
 
 \begin{document}
 	
-\title{Proposal of a Badging System for Reproducibility and Replicability in Remote Sensing Research}
+\title{A Badging System for Reproducibility and Replicability in Remote Sensing Research}
 	
 \author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
 	Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
 	and~Antonio~C.~Medeiros% <-this % stops a space
-	\thanks{A.\ C.\ Frery and A.\ C.\ Medeiros are with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, Brazil.
-		A.\ C.\ Frery is also with the Key Lab of Intelligent Perception and Image Understanding of the Ministry of Education, Xidian University, Xi'an, China. (email: acfrery@laccan.ufal.br)}% <-this % stops a space
-	\thanks{Luis Gomez is with the Universidad de Las Palmas de Gran Canaria, Spain}% <-this % stops a space
+	\thanks{A.\ C.\ Frery is with the School of Mathematics and Statistics, Victoria University of Wellington, 6140 New Zealand, and with the Key Lab of Intelligent Perception and Image Understanding of the Ministry of Education, Xidian University, Xi'an, 710126 China (e-mail: alejandro.frery@vuw.ac.nz).}% <-this % stops a space
+	\thanks{Antonio~C.~Medeiros is with the with the \textit{Laborat\'orio de Computa\c c\~ao Cient\'ifica e An\'alise Num\'erica} -- LaCCAN, Universidade Federal de Alagoas, Macei\'o, 57072-900 Brazil (e-mail: antoniomedeiros@laccan.ufal.br).}% <-this % stops a space
+	\thanks{Luis Gomez is with the Universidad de Las Palmas de Gran Canaria, 35017 Spain (e-mail: luis.gomez@ulpgc.es).}% <-this % stops a space
 	\thanks{Manuscript received XX, accepted YY.}}
 
 \markboth{IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing,~Vol.~XX, No.~YY, Month~2020}%
@@ -81,6 +81,11 @@ These two initiatives belong to the IEEE scientific ecosystem.
 
 However, is this enough for sound Science in Remote Sensing? 
 We do not think so. 
+Balz and Rocca~\cite{ReproducibilityandReplicabilityinSARRemoteSensing} conducted an online survey on focused on experienced scientists, including editors
+and associate editors, that are active
+in the scientific publication process in the field of SAR -- Synthetic Aperture Radar Remote Sensing.
+With \num{250} responses, of which only one did not complete the survey, they concluded that \SI{75}{\percent} of the respondents encountered problems when trying to reproduce or replicate results from works published in some of the major Journals of the area.
+
 Many authors continuously strive to disseminate their research findings in such a way that any user will be able to validate them at a later stage. 
 Those ways include the proposal of software architectures, the use of open data, FLOSS (Free/Libre Open Source Software), and other initiatives.
 
@@ -540,6 +545,14 @@ The authors would like to thank CNPq and Fapeal (Brazil) for partial support of 
 
 \bibliographystyle{IEEEtran}
 \bibliography{../../Common/references}	
+
+	\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{ACFrery.jpg}}]{Alejandro C.\ Frery}(S'92--SM'03)
+	received a B.Sc. degree in Electronic and Electrical Engineering from the Universidad de Mendoza, Mendoza, Argentina.
+	His M.Sc. degree was in Applied Mathematics (Statistics) from the Instituto de Matem\'atica Pura e Aplicada (IMPA, Rio de Janeiro) and his Ph.D. degree was in Applied Computing from the Instituto Nacional de Pesquisas Espaciais (INPE, S\~ao Jos\'e dos Campos, Brazil).
+	He is Professor of Statistics and Data Science with the School of Mathematics and Statistics, Victoria University of Wellington, New Zealand, and holds a Huashan Scholar position (2019--2021) with the Key Lab of Intelligent Perception and Image Understanding of the Ministry of Education, Xidian University, Xi'an, China.
+	His research interests are statistical computing and stochastic modeling.
+\end{IEEEbiography}
+
 
 
 \end{document}

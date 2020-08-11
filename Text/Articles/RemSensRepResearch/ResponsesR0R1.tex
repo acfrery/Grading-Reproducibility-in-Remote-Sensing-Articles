@@ -1,36 +1,19 @@
 \RequirePackage{xr}
-\externaldocument{FusionEvidencesPolSAR-R1}
+\externaldocument{GradingReproducibilityRS_R0}
 
-\documentclass[journal,onecolumn,draftcls,11pt]{IEEEtran}
+\documentclass[journal,onecolumn,draftcls,12pt]{IEEEtran}
 
-\usepackage{graphicx}
-\graphicspath{{../Figures/GRSL_2020/}%
-	{../Figures/GRSL_2020/FactorPlots/}%
-	{../Images/GRSL_2020/}}
-
-\usepackage{subcaption}
-\captionsetup[table]{font=small,size=smaller,textfont=sc}
-\captionsetup[figure]{font=small,size=smaller}
-
-\usepackage{booktabs}
 \usepackage[T1]{fontenc}
 \usepackage{cite}
-\usepackage[cmex10]{amsmath}
 \usepackage{color}
-\usepackage{bm,bbm}
 \usepackage{wasysym}
 \usepackage{texnames}
 \usepackage{url}
 
-\usepackage[boxed]{algorithm2e}   % AAB inserido
 \usepackage[listings]{tcolorbox}
 
-%\usepackage{siunitx}
 \usepackage[binary-units]{siunitx}
 \usepackage{multirow,bigstrut}
-
-\DeclareMathOperator{\traco}{tr}
-
 
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
 %DIF UNDERLINE PREAMBLE %DIF PREAMBLE
@@ -112,17 +95,15 @@ keepspaces=true %DIF PREAMBLE
 %DIF END PREAMBLE EXTENSION ADDED BY LATEXDIFF
 
 \begin{document}
-%%% AAB - Mudei o titulo
-\title{Fusion of Evidences in Intensities Channels for Edge Detection in PolSAR Images\\
+\title{A Badging System for Reproducibility and Replicability in Remote Sensing Research\\
 	Revision R1}
 
-\author{Anderson~A~de~Borba,
-	Maurício~Marengoni,
-	and~Alejandro~C.~Frery,~\IEEEmembership{Senior~Member,~IEEE}}
+\author{Alejandro~C.~Frery,~\IEEEmembership{Senior Member,~IEEE,}
+	Luis~Gomez,~\IEEEmembership{Senior Member,~IEEE,}
+	and~Antonio~C.~Medeiros}
 
-\markboth{IEEE Geoscience and Remote Sensing Letters}%
-%%% Mudei o nome e o dado - Não notei onde isso está no pdf???
-{Anderson~A.\ Borba et al.\MakeLowercase{\textit{et al.}}: Fusion Information}
+\markboth{IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing}%
+{Frery \MakeLowercase{\textit{et al.}}: Badging Reproducibility and Replicability}
 
 \maketitle
 
@@ -130,646 +111,71 @@ keepspaces=true %DIF PREAMBLE
 
 \section{Editor-in-Chief}
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#1]
-Your manuscript GRSL-00400-2020 Fusion of Evidences in Intensities Channels for Edge Detection in PolSAR Images has been reviewed by the GRSL  Editorial Review Board and found to be not acceptable without  major revisions.
-
-It is recommended that you revise your paper and resubmit it in  accordance with the Editorial Review Board comments given below.   Complete instructions for submitting a revision can be found at the bottom of this letter.
+Your manuscript JSTARS-2020-00567 Proposal of a Badging System for Reproducibility and Replicability in Remote Sensing Research has been reviewed by the J-STARS Editorial Review Board and recommended for publication subject to satisfactory response to minor revisions suggested. It is recommended that you resubmit your manuscript as revised in accordance with the Editorial Review Board comments given below.
 \end{tcolorbox}
 
 Thank you very much for handling this manuscript.
 
 We have prepared a revised version taking into account all the comments and suggestions made by the reviewers.
 
-In fact, we found the reviews well-informed and constructive, and we would like to thank the reviewers, the Associate Editor, and Prof.\ Avik Bhattacharya for helping us make a better contribution.
-
 This response letter addresses all the comments in red, followed by
 our reactions, and, whenever necessary, the changes made.
 
 We also include the \texttt{diff} article between the prior and current versions, where deletions are in red and additions are in blue.
 
-As a final comment, we would like to stress that we added a link to a repository with the code and data that promote the reproducibility of this work; cf.\ Sec.~\ref{Sec:Implementation}.
-
 \section{Associate Editor}
+
 \begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#1]
-Both reviewers have given valuable comments and suggested that a major revision is necessary.
+This manuscript has some merit, however it is not in a fine shape for consideration of acceptance in its current shape. As being pointed out in the review reports, it should be further improved in terms of the writing. Please refer to the detailed comments. It is suggested to remove "Proposal of" in the paper title.
 \end{tcolorbox}
 
 Thank you very much.
+We changed the title accordingly.
 To the best of our knowledge, we have addressed all the comments and suggestions.
 
 \section{Reviewer \#1}
-% AAB inserido
 
 
 \vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#1]
-This paper discusses the fusion of evidences in PolSAR images for the edge detection. Here are some suggestions.
-
-In the abstract, “fusion of evidence” should be “fusion of evidences”. “in the intensity (hh), (hv), and (vv)
-channels” should be “in the intensity channels (hh, hv and vv)”.
+Reviewing the web content pack of submitted paper requires richer academic knowledge. The authors should discuss whether such a badging system will affect the difficulty of peer review.
 \end{tcolorbox}
 
 Thank you very much for this suggestion.
 We made the changes, as requested:
 
 \begin{tcolorbox}[colback=white,colframe=black,title=Changes \#1]
-The present study discusses an edge detection method based on the fusion of \DIFdelbegin \DIFdel{evidence }\DIFdelend \DIFaddbegin \DIFadd{evidences }\DIFaddend obtained in the intensity \DIFaddbegin \DIFadd{channels hh, hv, and vv }\DIFaddend in the intensity \DIFdelbegin \DIFdel{ (hh), (hv), and (vv) channels}\DIFdelend of PolSAR multi-look images. 
+
 \end{tcolorbox}
 
 
 
 \vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#2]
-% AAB inserido
-In the introduction part, the paragraph “We adopted the Gambini Algorithm...”,what is the purpose to
-use Gambini Algorithm? It should be elaborated to help the reader understand.
+The author's current badging system only makes differences based on FLOSS. Why not use a more detailed evaluation system? Some works may mainly contribute to datasets or conception, where codes and open source state are not very crucial for these works.
 \end{tcolorbox}
 
-We added a rationale for the choice of this Algorithm:
+
 
 \begin{tcolorbox}[colback=white,colframe=black,title=Changes \#2]
-\DIFdelbegin \DIFdel{We adopted the }\DIFdelend \DIFaddbegin \DIFadd{The }\DIFaddend Gambini Algorithm~\cite{gmbf_sc} \DIFdelbegin \DIFdel{, which }\DIFdelend \DIFaddbegin \DIFadd{is an attractive edge detection technique.
-It is local, as it finds evidence of an edge over a thin strip of data; 
-it works with any model, which makes it suitable for SAR data; 
-and it has shown better performance than other approaches.
-This algorithm }\DIFaddend consists in casting rays\DIFaddbegin \DIFadd{, }\DIFaddend and then finding the evidence of an edge in the ray by maximizing a value function.
 \end{tcolorbox}
 
 
 \vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#3]
-% AAB inserido
-More detailed description for Gambini Algorithm in Section III is suggested.
+For some popular topics, different works may share a large amount of content other than papers, such as datasets, evaluation codes, or mind maps. Should these not completely original content be considered separately in the badging system?
 \end{tcolorbox}
-% AAB resposta
 
 Thank you very much for this suggestion.
-We made the changes and put the algorithm 1, as requested:
 
 \begin{tcolorbox}[colback=white,colframe=black,title=Changes \#3]
-
-\DIFdelbegin \DIFdel{We approach edge detection with the Gambini Algorithm~\mbox{%DIFAUXCMD
-\cite{gmbf, fbgm, nhfc}}\hspace{0pt}%DIFAUXCMD
-.
-%DIF < %% ACF
-%DIF < This technique is convenient for our subsequent fusion step, since it provides estimates of the edge location over the same ray.
-It consists of the following steps:
-}%DIFDELCMD < \begin{enumerate}
-\begin{enumerate}%DIFAUXCMD
-%DIFDELCMD < 	\item %%%
-\item%DIFAUXCMD
-\DIFdel{Identify the centroid of a region of interest (ROI) in an automatic, semi-automatic or manual manner.
-}%DIFDELCMD < \item %%%
-\item%DIFAUXCMD
-\DIFdel{Cast rays from the centroid to the outside of the area.
-	}%DIFDELCMD < \item %%%
-\item%DIFAUXCMD
-\DIFdel{Collect data on a strip, ideally of the size of a pixel, around the rays using the  Bresenham's midpoint line algorithm.
-	}%DIFDELCMD < \item %%%
-\item%DIFAUXCMD
-\DIFdel{Compute the value functionon every point of the ray.
-	}%DIFDELCMD < \item %%%
-\item%DIFAUXCMD
-\DIFdel{Use the GenSA method~\mbox{%DIFAUXCMD
-\cite{xgsh}}\hspace{0pt}%DIFAUXCMD
-, to find points of maxima in the functions of interest.
-}%DIFDELCMD < \item %%%
-\item%DIFAUXCMD
-\DIFdel{Fuse the evidence of detected edges in the (hh), (hv) and (vv) channels.
-}
-\end{enumerate}%DIFAUXCMD
-%DIFDELCMD < \end{enumerate}
-%DIFDELCMD < %%%
-\DIFdelend \DIFaddbegin \DIFadd{The Gambini algorithm estimates the point at which the properties of a sample change.
-It has been used with stochastic distances~\mbox{%DIFAUXCMD
-\cite{nhfc}}\hspace{0pt}%DIFAUXCMD
-, and with the likelihood function~\mbox{%DIFAUXCMD
-\cite{gmbf, fbgm} }\hspace{0pt}%DIFAUXCMD
-for edge detection in SAR/PolSAR imagery.
-It can be adapted to any suitable measure of dissimilarity between two samples.
-}\DIFaddend 
-
-The \DIFdelbegin \DIFdel{value function is the reduced log-likelihood of the inner and external samples of the strip denoted, respectively, as $\bm z_\text{I}$ and $\bm z_\text{E}$.
-Each strip }\DIFdelend \DIFaddbegin \DIFadd{algorithm starts by casting rays from a point inside the candidate region, e.g., the centroid.
-Data are collected around each ray to form the sample }\DIFaddend $\bm z = (z_1,z_2,\dots,z_n)$\DIFdelbegin \DIFdel{is, thus, partitioned in two disjoint samples }\DIFdelend \DIFaddbegin \DIFadd{, which is partitioned }\DIFaddend at position $j$:
-%$$
-%\bm z = (\underbrace{z_1,z_2,\dots,z_j}_{\bm z_\text{I}}, 
-%\underbrace{z_{j+1}, z_{j+2},\dots,z_n}_{\bm z_\text{E}}).
-%$$
-%We assume two (possibly) different models for each partition:
-%$\bm Z_\text{I} \sim \Gamma(\mu_\text{I},L_\text{I})$, and 
-%$\bm Z_\text{E} \sim \Gamma(\mu_\text{E},L_\text{E})$.
-%We then estimate $(\mu_\text{I},L_\text{I})$ and $(\mu_\text{E},L_\text{E})$ with $\bm z_\text{I}$ and $\bm z_\text{E}$, respectively, by maximizing~\eqref{eq:LogLikelihoodGamma}, and obtain \DIFdelbegin \DIFdel{$(\widehat{\mu}_\text{I}, \widehat{L}_\text{I})$ and $(\widehat{\mu}_\text{E}, \widehat{L}_\text{E})$}\DIFdelend \DIFaddbegin \DIFadd{$\big(\widehat{\mu}_\text{I}, \widehat{L}_\text{I}\big)$ and $\big(\widehat{\mu}_\text{E}, \widehat{L}_\text{E}\big)$}\DIFaddend .
-
-\DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{We then compute the }\DIFaddend total log-likelihood \DIFdelbegin \DIFdel{at point $j$ is, then,
-}\DIFdelend \DIFaddbegin \DIFadd{of $\bm z_\text{I}$ and $\bm z_\text{E}$:
-}\DIFaddend \begin{equation}\label{eq:TotalLogLikelihood}
-\DIFdelbegin %DIFDELCMD < \begin{split}
-%DIFDELCMD < %\ell(j&;\bm z_\text{I},\bm z_\text{E}) = \\
-%DIFDELCMD < \ell(j&;\widehat{\mu}_I, \widehat{L}_I,\widehat{\mu}_E, \widehat{L}_E)=\\
-%DIFDELCMD < &j \big[\widehat{L}_\text{I}\ln (\widehat{L}_\text{I} / \widehat{\mu}_\text{I}) - \ln \Gamma(\widehat{L}_\text{I})\big]
-%DIFDELCMD < +\widehat{L}_\text{I} \sum_{k=1}^{j}\ln z_k -\frac{\widehat{L}_\text{I}}{\widehat{\mu}_\text{I}}\sum_{k=1}^{j} z_k +\\
-%DIFDELCMD < &(n-j) \big[\widehat{L}_\text{E}\ln (\widehat{L}_\text{E} / \widehat{\mu}_\text{E}) - \ln \Gamma(\widehat{L}_\text{E})\big]
-%DIFDELCMD < +\widehat{L}_\text{E} \sum_{k=j+1}^{n}\ln z_k -\\ &\frac{\widehat{L}_\text{E}}{\widehat{\mu}_\text{E}}\sum_{k=j+1}^{n} z_k.
-%DIFDELCMD < \raisetag{2.2em}
-%DIFDELCMD < \end{split}%%%
-\DIFdelend \DIFaddbegin \begin{aligned}
-\mathcal{L}\big(j&;\widehat{\mu}_I, \widehat{L}_I,\widehat{\mu}_E, \widehat{L}_E\big)= -\Bigg(
-	\frac{\widehat{L}_\text{I}}{\widehat{\mu}_\text{I}}\sum_{k=1}^{j} z_k +
-	\frac{\widehat{L}_\text{E}}{\widehat{\mu}_\text{E}}\sum_{k=j+1}^{n} z_k  
-	\Bigg)+\mbox{}\\
-&j \big[\widehat{L}_\text{I}\ln (\widehat{L}_\text{I} / \widehat{\mu}_\text{I}) - \ln \Gamma(\widehat{L}_\text{I})\big]
-+\widehat{L}_\text{I} \sum_{k=1}^{j}\ln z_k + \mbox{}\\
-&(n-j) \big[\widehat{L}_\text{E}\ln (\widehat{L}_\text{E} / \widehat{\mu}_\text{E}) - \ln \Gamma(\widehat{L}_\text{E})\big]
-+\widehat{L}_\text{E} \sum_{k=j+1}^{n}\ln z_k .%-\\ 
-\raisetag{2.2em}
-\end{aligned}\DIFaddend 
-\end{equation}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#3- continue]
-\DIFdelbegin \DIFdel{We then apply GenSA to find  
-}\begin{displaymath}
-\DIFdel{\widehat{\jmath}= \arg\max\limits_{j\in [\min_s,N-\min_s]}\ell(j;\widehat{\mu}_I, \widehat{L}_I,\widehat{\mu}_E, \widehat{L}_E),
-}\end{displaymath}%DIFAUXCMD
-%DIFDELCMD <  
-%DIFDELCMD < %%%
-\DIFdel{where $\min_s$ is a }\DIFdelend \DIFaddbegin \DIFadd{and the estimate of the edge position on the ray is the coordinate $\widehat\jmath$ which maximizes it.
-}
-
-\DIFadd{Algorithm~\ref{Algo:GambiniEdgeDetection} is the pseudocode of the basic edge detection with the Gambini Algorithm.
-We found that one hundred rays is a good compromise between spatial continuity and computational load.
-Also, $\min_s$ is the }\DIFaddend minimum sample size\DIFdelbegin \DIFdel{that we set to $14$.}\DIFdelend \DIFaddbegin \DIFadd{.%DIF >  that we set to $14$.
-}\DIFaddend 
-
-\DIFdelbegin \DIFdel{In this way, we obtain one estimates for the edge for each intensity channel.
-Notice that this approach can be extended and/or modified to cope with any kind of data.
-}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{We will see ways of fusing these evidences in the next section}\DIFdelend \DIFaddbegin \begin{algorithm}[hbt]
-\SetAlgoLined
-\KwData{$n_c$ intensity channels, interior point, number of rays}
-\KwResult{$n_c$ binary images with evidences of edges}
-%DIF > initialization\;
-\For{each band $1\leq c\leq n_c$}{
-	\For{each ray passing through the interior point}{
-		$\bm z = (z_1,z_2,\dots,z_n)\leftarrow$ data collected around the ray\;
-		\For{each $\min_s\leq j\leq n-\min_s$}{\nllabel{Line:InitFor}
-			Partition the sample as $\bm z_{\text{I}}=(z_{\min_s},\dots,z_j)$ and 
-			$\bm z_{\text{E}}=(z_{j+1},\dots,z_{n-\min_s})$\;
-			Compute $\big(\widehat{\mu}_\text{I}, \widehat{L}_\text{I}\big)$ with $\bm z_{\text{I}}$, and $\big(\widehat{\mu}_\text{E}, \widehat{L}_\text{E}\big)$ with $\bm z_{\text{E}}$\;
-			Compute the total log-likelihood at $j$ as $\mathcal L\big(j;\widehat{\mu}_I, \widehat{L}_I,\widehat{\mu}_E, \widehat{L}_E\big)$\;
-		}
-		$\widehat\jmath\leftarrow$ the value of $j$ which maximizes the total log-likelihood function\;
-		\Return $(\widehat x, \widehat y)$, the coordinates of each $\widehat\jmath$\;
-	}
-\Return the binary image $\widehat{\bm\jmath}_c$ with $1$ at every $(\widehat x, \widehat y)$, and $0$ otherwise.
-}
-\caption{\DIFadd{Gambini algorithm for intensity channels}}\label{Algo:GambiniEdgeDetection}
-\end{algorithm}
-
-\DIFadd{In our implementation, we replace the exhaustive sequential search (the innermost }\textbf{\DIFadd{for}} \DIFadd{loop) by Generalized Simulated Annealing (GenSA~\mbox{%DIFAUXCMD
-\cite{xgsh}}\hspace{0pt}%DIFAUXCMD
-)}\DIFaddend .
-
-%DIF > Notice that this approach can be extended and/or modified to cope with any kind of data.
-%DIF > We will see ways of fusing these evidences in the next section.
-\DIFaddbegin 
 \end{tcolorbox}
 
 
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#4]
-% AAB inserido
-	For Eq. (1), the meaning of variable L should be explained.
-	On Page 2, what is the meaning of “we will estimate L on each sample” ?	
-\end{tcolorbox}
-
-Thank you very much for noticing this omission.
-We now clarify the meaning of $L$ and of its local estimation:
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#4]
-Multi-looked fully polarimetric data follow the Wishart distribution with PDF defined by:
-\begin{equation}
-    f_{\mathbf{Z}}(\DIFdelbegin \DIFdel{\mathbf{Z}}\DIFdelend \DIFaddbegin \DIFadd{\mathbf{z}}\DIFaddend ;\mathbf{\Sigma},L)=\DIFdelbegin \DIFdel{\frac{L^{mL}|\mathbf{Z}|^{L-m}}{|\mathbf{\Sigma}|^{L}\Gamma_m(L)} }\DIFdelend \DIFaddbegin \DIFadd{\frac{L^{pL}|\mathbf{z}|^{L-p}}{|\mathbf{\Sigma}|^{L}\Gamma_p(L)} }\DIFaddend \exp(-L\traco(\mathbf{\Sigma}^{-1}\DIFdelbegin \DIFdel{\mathbf{Z}}\DIFdelend \DIFaddbegin \DIFadd{\mathbf{z}}\DIFaddend )),
-    \label{eq:DistWishart}
-\end{equation} 
-where \DIFdelbegin \DIFdel{, }\DIFdelend \DIFaddbegin \DIFadd{$\mathbf z$ is a positive-definite Hermitian matrix, 
-$L$ is the number of looks, 
-}\DIFaddend $\traco(\cdot)$ is the trace operator of a matrix, \DIFdelbegin \DIFdel{$\Gamma_m(L)$ }\DIFdelend \DIFaddbegin \DIFadd{$\Gamma_p(L)$ }\DIFaddend is the multivariate Gamma function defined by \DIFdelbegin \DIFdel{$
-	\Gamma_m(L)=\pi^{\frac{1}{2}m(m-1)} \prod_{i=0}^{m-1}\Gamma(L-i)$}\DIFdelend \DIFaddbegin \DIFadd{$
-	\Gamma_p(L)=\pi^{\frac{1}{2}p(p-1)} \prod_{i=0}^{p-1}\Gamma(L-i)$}\DIFaddend ,
-and $\Gamma(\cdot)$ is the Gamma function.
-We used three \DIFdelbegin \DIFdel{$m=3$ }\DIFdelend \DIFaddbegin \DIFadd{$p=3$ }\DIFaddend channels in this study. 
-This situation is denoted by $\mathbf{Z}\sim W(\mathbf{\Sigma}, L)$, which satisfies $E[\mathbf{Z}]=\mathbf{\Sigma}$. 
-This assumption usually holds \DIFdelbegin \DIFdel{on targets where the speckle is fully developed }\DIFdelend \DIFaddbegin \DIFadd{for fully developed speckle }\DIFaddend but, since we will estimate $L$ \DIFdelbegin \DIFdel{on each sample (}\DIFdelend \DIFaddbegin \DIFadd{locally }\DIFaddend instead of considering the same number of looks for the whole image\DIFdelbegin \DIFdel{)}\DIFdelend , we will in part take into account departures from such hypothesis.
-\end{tcolorbox}
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#5]
-On Page 2, what is the meaning of “we will estimate L on each sample” ?
-\end{tcolorbox}
-
-Thank you very much for this suggestion.
-We better explain how we estimate the L in each sample.
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#5]
-This assumption usually holds \DIFdelbegin \DIFdel{on targets where the speckle is fully developed }\DIFdelend \DIFaddbegin \DIFadd{for fully developed speckle }\DIFaddend but, since we will estimate $L$ \DIFdelbegin \DIFdel{on each sample (}\DIFdelend \DIFaddbegin \DIFadd{locally }\DIFaddend instead of considering the same number of looks for the whole image\DIFdelbegin \DIFdel{)}\DIFdelend , we will in part take into account departures from such hypothesis.
-\end{tcolorbox}
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#6]
-% AAB inserido
-In Section IV, different symbol for $\ell=mn$ should be used to distinguish the $\ell$ in Eq. (3).
-\end{tcolorbox}
-
-Thank you very much for your careful reading.
-In fact, we used the same symbol for two different entities.
-We opted for denoting the likelihood with $\mathcal L$, and keeping $\ell$ for the image size.
-The equations that changed appear highlighted in the \texttt{diff} manuscript.
-
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#7]
-% AAB inserido
-What is the relationship between and $m$, $n$, $c$ and $n_c$? Make it clear.
-\end{tcolorbox}
-
-We now explain the notation more clearly:
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#7]
-\DIFdelbegin \DIFdel{Denote in the following $\widehat{\bm\jmath}_c$ the binary image with same support as the input data $c$ ($m$ lines and $n$ columns; denote $\ell=mn$), where }\DIFdelend \DIFaddbegin \DIFadd{Assume we have $n_c$ binary images $\{\widehat{\bm\jmath}_c\}_{1\leq c\leq n_c}$ in which~}\DIFaddend $1$ denotes an estimate of edge and $0$ otherwise.
-\DIFdelbegin \DIFdel{We have $n_c$ of these image to fuse, and the result of the fusion will be denoted }\DIFdelend \DIFaddbegin \DIFadd{They have common size $m\times n$; denote $\ell=mn$.
-These images will be fused to obtain the binary image }\DIFaddend $\bm I_F$.
-\end{tcolorbox}
-
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#8]
-% AAB inserido
-In Section III-A, the meaning of $(x,y)$ should be explained.
-\end{tcolorbox}
-
-We now explain that these are the image coordinates:
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#8]
-The simple average fusion method proposes the arithmetic mean of the edge evidence in each of the $n_c$ channels:
-$\bm I_F(x,y)=(n_c)^{-1}\sum_{c=1}^{n_c} \widehat{\bm\jmath}_c(x,y)$\DIFaddbegin \DIFadd{,
-	where $1\leq x\leq m$ indexes the rows, and $1\leq y\leq n$ the columns of the image}\DIFaddend .
-%where $\widehat\jmath_c$ denotes the estimate obtained in channel $c$.
-\end{tcolorbox}
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#9]
-% AAB inserido
-	 In Section V-A Line 16, correct the “Fig. 1a” and “Fig. 1b”.	
-\end{tcolorbox}
-
-Thank you very much.
-Corrected.
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#10]
-% AAB inserido
-What is the meaning of “$\ell(4)$” in Section V-A?	
-\end{tcolorbox}
-
-This was unclear, indeed; thanks for noticing.
-The new version states:
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#10]
-It is worth noting that GenSA has accurately identified the maximum value of \DIFdelbegin \DIFdel{$\ell$}\DIFdelend \DIFaddbegin \DIFadd{$\mathcal L$ (Eq.}\DIFaddend ~\eqref{eq:TotalLogLikelihood}\DIFaddbegin \DIFadd{)}\DIFaddend , even in the presence of multiple local maxima.
-\end{tcolorbox}
-
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#11]
-For the experiments, more examples are suggested to verify the conclusion.
-\end{tcolorbox}
-% AAB resposta
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#11]
-We have inserted two more cases, the first considering another region of interest in Flevoland's image. Figures 4(a) and (b) show the region of interest and figure (5) the detection of edge evidence for each channel. The twp best edge evidences fusions are shown in figure (6).
-For the second region using the San Francisco bay image, we show the region of interest in figure (7) and the edge detection for each channel in figure (8). The two best edge evidences fusions are shown in figure (8).    
-\end{tcolorbox}
-
-
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#12]
-% AAB inserido
-	“Synthetic Polarimetric Aperture Radar (PolSAR)” should be “Polarimetric Synthetic Aperture Radar
-(PolSAR)”
-\end{tcolorbox}
-
-Corrected.
-Thank you very much.
 
 \section{Reviewer \#2}
-% AAB Inserido
-Comments to the Author
-The paper present an edge detection method based on the fusion of evidence obtained
-on the difference channels of Polarimetric SAR images.
-The paper is well written and organized. It is easy to follow. The theoretical aspects are well presented. The bibliography is adequate for Letter.
-The main concern I have is related to experimental results. Even if interesting and well presented, the considered test cases are limited. 
-\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#1]
-% AAB inserido
-In my opinion, the authors should consider the possibility of showing other test cases. Generally speaking, one single test case is not enough to draw conclusions.
-Therefore, I encourage the authors to consider at least one other test-case (preferably other two). The authors could reduce the size of the presented images, in order to have enough space. A deeper discussion of the obtained results should be considered.
-\end{tcolorbox}
-% AAB resposta
-The authors thank the reviewer for the suggestions, which contributed to improve the quality of the article.
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#1]
-We have inserted two more cases, the first considering another region of interest in Flevoland's image. Figures 4(a) and (b) show the region of interest and figure (5) the detection of edge evidence for each channel. The twp best edge evidences fusions are shown in figure (6).
-For the second region using the San Francisco bay image, we show the region of interest in figure (7) and the edge detection for each channel in figure (8). The two best edge evidences fusions are shown in figure (8). 
+
+\vskip3em\begin{tcolorbox}[colback=red!5!white,colframe=red!75!black,title=Comment \#3]
+The paper is well written, and I think the authors propose a new direction for remote sensing, therefore I would suggest the acceptance of the paper.
 \end{tcolorbox}
 
-
-\section{Anothers changes}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#1 - Abstract]
-The fusion methods used are\DIFaddbegin \DIFadd{: 
-}\DIFaddend simple average, 
-multi-resolution discrete \DIFaddbegin \DIFadd{wavelet transform }\DIFaddend (MR-DWT)\DIFdelbegin \DIFdel{and 
-stationary (MR-SWT) wavelet transforms}\DIFdelend ,
-principal component analysis (PCA), 
-ROC statistics, 
-\DIFaddbegin \DIFadd{multi-resolution stationary (MR-SWT) wavelet transform, 
-}\DIFaddend and a multi-resolution method based on singular value decomposition (MR-SVD). 
-A quantitative analysis suggests that \DIFdelbegin \DIFdel{MR-SWT provides }\DIFdelend \DIFaddbegin \DIFadd{PCA and MR-SVD provide }\DIFaddend the best results.
-\end{tcolorbox}
-
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#2 - Introduction]
-Among the available edge detection techniques for SAR and PolSAR images, it is worth mentioning: \DIFdelbegin %DIFDELCMD < \begin{itemize}
-%DIFDELCMD < \item %%%
-\DIFdelend techniques based on denoising~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{sjx, lzly, wxbzw, law, cgaf}}\hspace{0pt}%DIFAUXCMD
-;   
-}%DIFDELCMD < \item %%%
-\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{sjx, lzly, wxbzw, cgaf}}\hspace{0pt}%DIFAUXCMD
-;   
-}\DIFaddend Markov random fields~\cite{bf};	
-\DIFdelbegin %DIFDELCMD < \item %%%
-\DIFdelend the deep learning approach~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{bac, ztmxzxf} }\hspace{0pt}%DIFAUXCMD
-}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{ztmxzxf} }\hspace{0pt}%DIFAUXCMD
-}\DIFaddend applied to segmentation and classification; and
-\DIFdelbegin \DIFdel{,
-}%DIFDELCMD < \item %%%
-\DIFdelend statistical techniques~\cite{gmbf, fbgm, nhfc} applied in edge detection in PolSAR \DIFdelbegin \DIFdel{/ }\DIFdelend \DIFaddbegin \DIFadd{and }\DIFaddend SAR imagery.
-\DIFdelbegin %DIFDELCMD < \end{itemize}
-%DIFDELCMD < %%%
-\DIFdelend 
-
-This article follows the statistical modeling approach using the techniques described in~\cite{gmbf, fbgm, nhfc} to find edge evidences, followed by fusion processes~\cite{mit, bmf_2019}. 
-\DIFdelbegin \DIFdel{Our approach does not attempt to reduce the speckle, but to extract information from its statistical properties.
-}\DIFdelend %DIF > Our approach does not attempt to reduce the speckle, but to extract information from its statistical properties.
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#3 - Introduction]
-\DIFdelbegin \DIFdel{The value function we use is the }\DIFdelend \DIFaddbegin \DIFadd{We use the total }\DIFaddend likelihood of two samples: one inside the edge, another outside the edge.
-Without loss of generality, we assume the complex scaled Wishart distribution for the fully polarimetric observations\DIFdelbegin \DIFdel{~\mbox{%DIFAUXCMD
-\cite{ade}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend , from which Gamma laws stem for each intensity channel.
-The value function depends on the estimates that index such Gamma laws\DIFdelbegin \DIFdel{.
-We }\DIFdelend \DIFaddbegin \DIFadd{; and
-we }\DIFaddend estimate them by maximum likelihood\DIFdelbegin \DIFdel{with the BFGS optimization method implemented in the }\texttt{\DIFdel{maxLik}} %DIFAUXCMD
-\DIFdel{package~\mbox{%DIFAUXCMD
-\cite{ht}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend .
-
-The \DIFdelbegin \DIFdel{value function is the total likelihood .
-It }\DIFdelend \DIFaddbegin \DIFadd{total likelihood function }\DIFaddend is non-differentiable at most points\DIFdelbegin \DIFdel{in the domain. 
-It is known that }\DIFdelend \DIFaddbegin \DIFadd{, and }\DIFaddend classical methods have difficulties in finding \DIFdelbegin \DIFdel{the maximumof a non-differentiable functions}\DIFdelend \DIFaddbegin \DIFadd{its maximum}\DIFaddend . 
-We used the Generalized Simulated Annealing (GenSA)~\cite{xgsh} method to solve this problem. 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#4 - Introduction]
-We discuss \DIFaddbegin \DIFadd{and compare }\DIFaddend six fusion methods:
-\DIFdelbegin %DIFDELCMD < \begin{itemize}
-%DIFDELCMD < \item %%%
-\DIFdelend Simple average~\cite{mit}, 
-\DIFdelbegin %DIFDELCMD < \item %%%
-\DIFdelend Multi-Resolution Discrete Wavelet, MR-DWT~\cite{n_r},
-\DIFdelbegin %DIFDELCMD < \item %%%
-\DIFdelend Principal Component Analysis, PCA~\cite{n_r,mit},
-\DIFdelbegin %DIFDELCMD < \item %%%
-\DIFdelend ROC statistics~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{gs,fawcett}}\hspace{0pt}%DIFAUXCMD
-,
-}%DIFDELCMD < \item %%%
-\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{gs}}\hspace{0pt}%DIFAUXCMD
-,
-}\DIFaddend Multi-Resolution Stationary Wavelet Transform, MR-SWT~\cite{n_r, jjly}, and 
-\DIFdelbegin %DIFDELCMD < \item %%%
-\DIFdelend Multi-Resolution Singular Value Decomposition, MR-SVD~\cite{naidu}.
-\DIFdelbegin %DIFDELCMD < \end{itemize}
-%DIFDELCMD < %%%
-\DIFdelend 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#5 - Introduction]
-
-The article is structured as follows.
-Section~\ref{sec_02} describes \DIFdelbegin \DIFdel{statistical modeling}\DIFdelend \DIFaddbegin \DIFadd{the models}\DIFaddend .
-Section~\ref{sec_03} describes \DIFdelbegin \DIFdel{edge detection for PolSAR data}\DIFdelend \DIFaddbegin \DIFadd{the edge detection}\DIFaddend .
-Section~\ref{sec_04} describes the \DIFdelbegin \DIFdel{approach to edge evidence fusing }\DIFdelend \DIFaddbegin \DIFadd{approaches for fusing edge evidences}\DIFaddend .
-Section~\ref{sec_05} presents \DIFdelbegin \DIFdel{numerical results.
-Finally, }\DIFdelend \DIFaddbegin \DIFadd{the results.
-In }\DIFaddend Section~\ref{sec_06} \DIFdelbegin \DIFdel{concludes the work with observations, future directions of research , and the feasibility of detecting edges in each channel of PolSAR images}\DIFdelend \DIFaddbegin \DIFadd{we discuss the results, and outline future research directions}\DIFaddend .
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#6 - Section II]
-\DIFdelbegin \DIFdel{Fully polarimetric data may be modeled by~}%DIFDELCMD < \eqref{eq:DistWishart}%%%
-\DIFdel{.
-}\DIFdelend Since we are interested in describing the information conveyed by parts of such matrix \DIFdelbegin \DIFdel{, we rely on the results presented in~\mbox{%DIFAUXCMD
-\cite{lee,hsbmp}}\hspace{0pt}%DIFAUXCMD
-.
-In particular}\DIFdelend \DIFaddbegin \DIFadd{under the Wishart model}\DIFaddend , we assume that the distribution of each intensity channel is a 
-Gamma law with probability density function
-\begin{equation}
-f_Z(z;\mu,L)=\frac{L^{L}z^{L-1}}{\mu^{L}\Gamma(L)} \exp\big\{-Lz/\mu\big\},\quad z>0,
-\label{func_dens_uni_gamma}
-\end{equation}
-where $L>0$\DIFdelbegin \DIFdel{(rather than $L\geq1$ to allow for flexibility)}\DIFdelend , and
-$\mu>0$ is the mean.
-\DIFdelbegin %DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdel{Given }\DIFdelend \DIFaddbegin \DIFadd{The log-likelihood of }\DIFaddend the sample $\bm z = (z_1,\dots,z_n)$ \DIFdelbegin \DIFdel{,
-the reduced log-likelihood of }\DIFdelend \DIFaddbegin \DIFadd{under }\DIFaddend this model is
-\begin{equation}
-\DIFdelbegin \DIFdel{\ell}\DIFdelend \DIFaddbegin \DIFadd{\mathcal L}\DIFaddend ( \DIFdelbegin %DIFDELCMD < \bm %%%
-\DIFdel{z }\DIFadd{\bm z;}\DIFdelend L,\mu\DIFaddbegin\DIFaddend ) = 
-n \big[L\ln (L / \mu) - \ln \Gamma(L)\big]
-+L \sum_{k=1}^{n}\ln z_k -\frac{L}{\mu}\sum_{k=1}^{n} z_k.
-\label{eq:LogLikelihoodGamma}
-\end{equation}
-
-We obtain \DIFdelbegin \DIFdel{$(\widehat L, \widehat \mu)$}\DIFdelend \DIFaddbegin \DIFadd{$\big(\widehat L, \widehat \mu\big)$}\DIFaddend , the maximum likelihood estimator (MLE) of $(L, \mu)$ based on $\bm z$, by maximizing~\eqref{eq:LogLikelihoodGamma} with the BFGS method\DIFdelbegin \DIFdel{implemented in the }\texttt{\DIFdel{maxLik}} %DIFAUXCMD
-\DIFdel{package}\DIFdelend ~\cite{ht}.
-We prefer optimization to solving $\nabla\ell=\bm 0$ for improved numerical stability.
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#7 - Section IV]
-\DIFaddbegin \DIFadd{We, thus, use two resolution levels.}\DIFaddend 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#8 - Section IV]
-The result of the fusion $I_F$ is the inverse DWT \DIFdelbegin \DIFdel{transformation }\DIFdelend \DIFaddbegin \DIFadd{transform }\DIFaddend of the coefficient matrices $\bm{\bar\jmath}_{c\text{HH}}$, $\bm{\bar\jmath}_{c\text{LL}}$, $\bm{\bar\jmath}_{c\text{LH}}$, and $\bm{\bar\jmath}_{c\text{HL}}$.
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#9 - Section IV]
-\begin{enumerate}
-\item Compute the \DIFdelbegin \DIFdel{components $\bm P_c=(\sum_{m=1}^{n_c} \bm V_c(m))^{-1}{\bm V_c}$, where $\bm V_c$ }\DIFdelend \DIFaddbegin \DIFadd{vector $\bm P=(P(1),\dots,P(n_c))=(\sum_{c=1}^{n_c} V(c))^{-1}{\bm V}$, where $\bm V$ }\DIFaddend is eigenvector associated with the highest eigenvalue of \DIFdelbegin \DIFdel{$\bm X$}\DIFdelend \DIFaddbegin \DIFadd{$\bm C_{n_c\times n_c}$}\DIFaddend ; notice that \DIFdelbegin \DIFdel{$\sum_{c=1}^{n_c}\bm P_c=1$}\DIFdelend \DIFaddbegin \DIFadd{$\sum_{c=1}^{n_c} P(c)=1$}\DIFaddend .
-\item Fuse \DIFdelbegin \DIFdel{$\bm I_F(x,y)=\sum_{c=1}^{n_c}\bm P_c\bm{\widehat\jmath}_c(x,y)$}\DIFdelend \DIFaddbegin \DIFadd{$\bm I_F(x,y)=\sum_{c=1}^{n_c} P(c)\bm{\widehat\jmath}_c(x,y)$}\DIFaddend .
-\end{enumerate}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#10 - Section IV]
-The ROC method was proposed and described on~\DIFdelbegin \DIFdel{\mbox{%DIFAUXCMD
-\cite{gs,fawcett}}\hspace{0pt}%DIFAUXCMD
-}\DIFdelend \DIFaddbegin \DIFadd{\mbox{%DIFAUXCMD
-\cite{gs}}\hspace{0pt}%DIFAUXCMD
-}\DIFaddend :
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#11 - Section IV]
-This section is based on~\cite{n_r, jjly}. The difference between MR-DWT and MR-SWT method is the replacement of the 
-\DIFdelbegin \DIFdel{method discrete wavelet transform }\DIFdelend \DIFaddbegin \DIFadd{Discrete Wavelet Transform }\DIFaddend (DWT) by the
-\DIFdelbegin \DIFdel{method stationary wavelet transform }\DIFdelend \DIFaddbegin \DIFadd{Stationary Wavelet Transform }\DIFaddend SWT. 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#12 - Section IV]
-
-MR-SVD Fusion~\cite{naidu} works similarly to MR-DWT. 
-\DIFdelbegin \DIFdel{The difference consists in changing the DWT filters by the SVD filters. 
-The }\DIFdelend %DIF > The difference consists in changing the DWT filters by the SVD filters. 
-\DIFaddbegin \DIFadd{The }\DIFaddend MR-SVD fusion method can be summarized as follows:
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#13 - Section IV]
-\begin{enumerate}
-\item Find the SVD decomposition of $\bm X_1=\bm U_1 \bm S_1 \bm V_1^T$, where $\bm U_1$ \DIFdelbegin \DIFdel{and $\bm V_1$ are  unitary and they have dimensions }\DIFdelend \DIFaddbegin \DIFadd{is a }\DIFaddend ${4\times 4}$ \DIFdelbegin \DIFdel{e ${\ell}/{4}\times{\ell}/{4}$ respectively. The diagonal entries $S_{ii}$ of }\DIFdelend \DIFaddbegin \DIFadd{unitary matrix, }\DIFaddend $\bm S_1$ \DIFdelbegin \DIFdel{are known as the singular values of $\bm X_1$ and it have dimension }\DIFdelend \DIFaddbegin \DIFadd{is a }\DIFaddend $4\times{\ell}/{4}$ \DIFaddbegin \DIFadd{rectangular diagonal matrix known as singular values matrix, and $\bm V_1$ is an ${\ell}/{4}\times{\ell}/{4}$~unitary matrix}\DIFaddend . The singular values are \DIFdelbegin \DIFdel{sorted in descending, and they are putting in the diagonal principal of the matrix, other entries must be zeros}\DIFdelend \DIFaddbegin \DIFadd{ordered in a decreasing order}\DIFaddend .
-\end{enumerate}
-\DIFaddbegin \DIFadd{We also used two resolution levels.
-}\DIFaddend 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#14 - Section V]
-\subsection{\DIFdelbegin \DIFdel{PolSAR image}\DIFdelend \DIFaddbegin \DIFadd{Flevoland images}\DIFaddend }
-\DIFdelbegin \DIFdel{We used }\DIFdelend \DIFaddbegin \DIFadd{Fig.~\ref{roi_gt}}\subref{flevoland_radial_4look} \DIFadd{shows }\DIFaddend a $750\times 1024$ pixels AIRSAR PolSAR image of Flevoland, L-band, \DIFdelbegin \DIFdel{for the tests. 
-Fig.~\ref{flevoland_radial_4look} shows the ROI, }\DIFdelend with the radial lines where edges are detected. 
-Fig.~\DIFdelbegin \DIFdel{\ref{gt_flevoland} }\DIFdelend \DIFaddbegin \DIFadd{\ref{roi_gt}}\subref{gt_flevoland} \DIFaddend shows the ground reference in red.
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#15 - Section V]
-\DIFdelbegin \DIFdel{The simple }\DIFdelend \DIFaddbegin \DIFadd{Simple }\DIFaddend average and PCA produce similar results.
-MR-SVD produces considerably less outliers than the other methods\DIFdelbegin \DIFdel{, at the cost of longer processing time}\DIFdelend .
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#16 - Section V]
-\DIFaddbegin \DIFadd{Fig.~\ref{roi_gt_2}  shows another region in the Flevoland image.
-In this case, it is a bright target surrounded by darker fields.
-Fig.~\ref{evidencias_flev_hh_hv_vv} shows the edges detected in each intensity channel and, again, the hv data are the one which produce the most accurate results.}\DIFdelend 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#17 - Section V]
-\DIFadd{Fig.~\ref{fusion_flev_met} shows the two best fusion results: PCA and MR-SVD.
-Notice that the latter (Fig.~\ref{fusion_flev_met}}\subref{fusion_flev_met:f}\DIFadd{) eliminates the wrong detection close to the center of the area, and has fewer wrongly detected points outside the region of interest.}\DIFdelend
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#18 - Section V]
-
-\subsection{\DIFadd{San Francisco Image}}
-
-\DIFadd{Fig.~\ref{roi_gt_SF} shows an area of an L-band AIRSAR image over San Francisco.
-The distinctive areas are urban, sea, and vegetation.
-The aim is finding the edge between the former and the other two.}\DIFdelend
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#19 - Section V]
-
-\DIFadd{Fig.~\ref{evidencias_sf_hh_hv_vv} shows the evidences of edges found in each of the three intensity channels.
-A visual inspection suggests that the hh channel is the one that produces the best estimation.
-}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#20 - Section V]
-\DIFadd{Fig.~\ref{fusion_sf_met} shows the two best fusion results: PCA and MR-SVD.
-Again, the latter is more resistant to outliers, both inside and outside the region of interest.
-}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#21 - Section V]
-
-\subsection{\DIFadd{Error analysis}}
-\DIFaddend Figure~\ref{probability_edge_detc} shows the error of $\widehat\jmath$ in finding the true edge \DIFaddbegin \DIFadd{shown in Fig.~\ref{roi_gt}}\subref{gt_flevoland}\DIFaddend , as measured on $100$ \DIFdelbegin \DIFdel{radial lines : }\DIFdelend \DIFaddbegin \DIFadd{lines with
-}\DIFaddend the minimum Euclidean distance \DIFdelbegin \DIFdel{among }\DIFdelend \DIFaddbegin \DIFadd{between }\DIFaddend the ground truth \DIFdelbegin \DIFdel{pixel and the several pixels detected }\DIFdelend \DIFaddbegin \DIFadd{and the detected pixel }\DIFaddend in the fusion methods.
-We use relative frequencies to estimate the probability of having an error smaller than a number of pixels. 
-Denoting $H(k)$ the number of \DIFdelbegin \DIFdel{replications }\DIFdelend \DIFaddbegin \DIFadd{lines }\DIFaddend for which the error is less than $k$ pixels, 
-an estimate of this probability is $f(k)={H(k)}/{n_r}$, where $n_r$ is \DIFdelbegin \DIFdel{the radial number }\DIFdelend \DIFaddbegin \DIFadd{number of lines}\DIFaddend . 
-In our analysis, $k$ varies between $1$ and $10$\DIFaddbegin \DIFadd{, and $n_r=100$}\DIFaddend . 
-The algorithm is described in Ref.~\cite{fbgm}.
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#22 - Section V]
-\subsection{Implementation Details}
-
-\DIFdelbegin \DIFdel{The system presented here was executed on a Intel\copyright\ Core i7-9750HQ CPU \mbox{%DIFAUXCMD
-\SI{2.6}{\giga\hertz} }\hspace{0pt}%DIFAUXCMD
-\mbox{%DIFAUXCMD
-\SI{16}{\giga\byte} }\hspace{0pt}%DIFAUXCMD
-RAM computer.  
-The method for detecting edge evidence MLE was implemented in the R language.
-The fusion methods were implemented in Matlab.}%DIFDELCMD < 
-
-%DIFDELCMD < %%%
-\DIFdelend Table~\ref{metrica_de_tempo} shows the running times (absolute and relative to the fastest method).
-\DIFaddbegin \DIFadd{The system presented here was executed on a Intel\copyright\ Core i7-9750HQ CPU \mbox{%DIFAUXCMD
-\SI{2.6}{\giga\hertz} }\hspace{0pt}%DIFAUXCMD
-\mbox{%DIFAUXCMD
-\SI{16}{\giga\byte} }\hspace{0pt}%DIFAUXCMD
-RAM computer. 
-}\DIFaddend 
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#23 - Section V]
-\DIFaddbegin \DIFadd{The method for detecting edge evidence MLE was implemented in the R language.
-The fusion methods were implemented in Matlab. 
-Code and data are available at }\url{https://github.com/anderborba/Code_GRSL_2020_1}\DIFadd{.
-}
-\end{tcolorbox}
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#24 - Section VI]
-We found evidence of edges using the maximum likelihood method under the Wishart model for PolSAR data. 
-The evidence was found in each of the three intensity channels of \DIFdelbegin \DIFdel{an }\DIFdelend AIRSAR L-band \DIFdelbegin \DIFdel{image over Flevoland }\DIFdelend \DIFaddbegin \DIFadd{images over Flevoland and San Francisco}\DIFaddend .
-\end{tcolorbox}
-
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#25 - Section VI]
-\DIFdelbegin \DIFdel{The }\DIFdelend \DIFaddbegin \DIFadd{Over the agricultural fields of Flevoland, the }\DIFaddend best edge evidence was observed on the hv channel. 
-\DIFdelbegin \DIFdel{We assessed the result by checking the closeness of the fused points to the actual edge, by the presence of outliers, and by the blurring effect}\DIFdelend \DIFaddbegin \DIFadd{The hh channel provided the best estimates of the edges between the urban and both sea and vegetation areas of San Francisco.
-Such diversity of information content justifies the need of fusing the edge evidences}\DIFaddend .
-\end{tcolorbox}
-
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#26 - Section VI]
-The best \DIFdelbegin \DIFdel{result was produced by }\DIFdelend \DIFaddbegin \DIFadd{results were produced by PCA and by }\DIFaddend the Multi-Resolution \DIFdelbegin \DIFdel{Stationary Wavelet Transform (MR-SWT)with a moderate cost of the }\DIFdelend \DIFaddbegin \DIFadd{Singular Value Decomposition (MR-SVD).
-Such enhancement comes at additional computational cost in terms of }\DIFaddend processing time.
-\end{tcolorbox}
-
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#27 - Section VI]
-
-We \DIFdelbegin \DIFdel{highlight two }\DIFdelend \DIFaddbegin \DIFadd{quantitatively assessed the results by checking the closeness of the fused points to the actual edge, and by the presence of outliers.
-Although the average and PCA are similar with respect to the probability of correctly detecting the edge, the latter provides a more effective weight of the evidences.
-In fact, PCA is able to completely discard misleading evidences, while the average cannot.
-}
-\end{tcolorbox}
-
-
-\begin{tcolorbox}[colback=white,colframe=black,title=Changes \#28 - Section VI]
-
-\DIFadd{Two }\DIFaddend avenues for future improvement of the fusion \DIFdelbegin \DIFdel{:
-}%DIFDELCMD < \begin{enumerate}
-%DIFDELCMD < 	\item %%%
-\DIFdelend \DIFaddbegin \DIFadd{are:
-(1)~}\DIFaddend increasing the number of evidences.
-	This is possible, since fully polarimetric data \DIFdelbegin \DIFdel{is }\DIFdelend \DIFaddbegin \DIFadd{are }\DIFaddend richer than mere intensity channels; and
-\DIFdelbegin %DIFDELCMD < \item %%%
-\DIFdelend \DIFaddbegin \DIFadd{(2)~}\DIFaddend post-processing of both partial evidences and fusion.
-\DIFdelbegin %DIFDELCMD < \end{enumerate}
-%DIFDELCMD < %%%
-\DIFdelend
-\end{tcolorbox}
-%\bibliographystyle{IEEEtran}
-%\bibliography{articles,acfrery}
+Thank you very much for your positive feedback.
 
 \end{document}
