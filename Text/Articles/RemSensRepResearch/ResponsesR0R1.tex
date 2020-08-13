@@ -1,7 +1,7 @@
 \RequirePackage{xr}
 \externaldocument{GradingReproducibilityRS_R0}
 
-\documentclass[journal,onecolumn,draftcls,12pt]{IEEEtran}
+\documentclass[journal,onecolumn,12pt]{IEEEtran}
 
 \usepackage[T1]{fontenc}
 \usepackage{cite}
@@ -14,6 +14,8 @@
 
 \usepackage[binary-units]{siunitx}
 \usepackage{multirow,bigstrut}
+
+\usepackage{merriweather}
 
 %DIF PREAMBLE EXTENSION ADDED BY LATEXDIFF
 %DIF UNDERLINE PREAMBLE %DIF PREAMBLE
@@ -124,6 +126,8 @@ our reactions, and, whenever necessary, the changes made.
 Please notice that we included a ``Disclaimer and non-affiliation'' section.
 It is our understanding that it is necessary, since we make explicit mention of the IEEE Geoscience and Remote Sensing Society, and of trademarked products.
 
+We improved the presentation of the Scientific Canvas, adding colors to lists related to the same aspect of the project.
+
 We also include the \texttt{diff} article between the prior and current versions, where deletions are in red and additions are in blue.
 
 \section{Associate Editor}
@@ -143,11 +147,11 @@ To the best of our knowledge, we have addressed all the comments and suggestions
 Reviewing the web content pack of submitted paper requires richer academic knowledge. The authors should discuss whether such a badging system will affect the difficulty of peer review.
 \end{tcolorbox}
 
-Thank you very much for this suggestion.
-We made the changes, as requested:
+We wholeheartedly agree with this comment.
+We enhanced the discussion of the role and composition of the Remote Sensing Reproducibility Committee (Section~IV.B), by adding the following:
 
 \begin{tcolorbox}[colback=white,colframe=black,title=Changes \#1]
-
+The role of such committee is solely verifying the reproducibility of the article and, thus, the expertise of their members may be from outside the Remote Sensing community.
 \end{tcolorbox}
 
 
@@ -156,9 +160,12 @@ We made the changes, as requested:
 The author's current badging system only makes differences based on FLOSS. Why not use a more detailed evaluation system? Some works may mainly contribute to datasets or conception, where codes and open source state are not very crucial for these works.
 \end{tcolorbox}
 
-
+Thank you very much for this suggestion.
+The proposal includes the use of Open data, and we took the opportunity to enhance its discussion in Section~IV.A.3.
+Also, notice in Fig.~3 that Open data is a requirement for aspiring to a Remote Sensing Reproducible Research badge.
 
 \begin{tcolorbox}[colback=white,colframe=black,title=Changes \#2]
+Although Open data are not necessarily free data, the authors must at least provide free samples, and code to read and export them to freely available computational platforms.
 \end{tcolorbox}
 
 
@@ -167,8 +174,17 @@ For some popular topics, different works may share a large amount of content oth
 \end{tcolorbox}
 
 Thank you very much for this suggestion.
+In fact, our projects include more elements, and they have proven their usefulness.
+Motivated by this comment, we added a new Section~IV.A.7 (``Additional artifacts'') with the following contents:
 
 \begin{tcolorbox}[colback=white,colframe=black,title=Changes \#3]
+Current collaborative research usually produces artifacts that may contribute to the replicability of the research.
+Among them, we may mention 
+Mind Maps, 
+Project Management files, 
+Wikis, 
+and a bug tracking database as Bugzilla.
+All these elements, well documented, may be added to the paper repository for optional scrutiny and use.
 \end{tcolorbox}
 
 

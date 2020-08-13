@@ -2,7 +2,11 @@
 
 \usepackage{texnames}
 \usepackage{graphicx}
-\graphicspath{{../../../Figures/PDF/}{../../../Images/PNG/}{../../../Images/JPG/}}
+\graphicspath{
+{../../../Figures/PDF/}
+{../../../Figures/PNG/}
+{../../../Images/PNG/}
+{../../../Images/JPG/}}
 \DeclareGraphicsExtensions{.pdf,.png}
 
 \usepackage{color}
@@ -231,6 +235,7 @@ The IEEE Remote Sensing Code Library -- RSCD\footnote{\url{http://www.grss-ieee.
 	Software should be relevant to the theory, concepts, and techniques of science and engineering as applied to sensing the earth, oceans, atmosphere, and space, and the processing, interpretation, and dissemination of this information.
 \end{quote}
 
+Its contents are reviewed, and accepted contributions receive a DOI (Digital Object Identifier).
 As such, RSCD is a significant player in the Remote Sensing reproducibility and replicability game.
 
 \section{Proposal}\label{Sec:Proposal}
@@ -296,7 +301,7 @@ The research course may change along with the work, but telling the whole story 
 \subsubsection{Open data} Open data can be accessed, used, and shared by Governments, businesses, and individuals. 
 Open data should be stored in widely accessible and persistent repositories, in standard, machine-readable formats.
 Please notice that Excel\textsuperscript{\textcopyright}\ spreadsheets do not comply with this requirement; use Comma-Separated Values (with \verb|.csv| extension) instead.
-Although Open data are not necessarily free data, the authors must at least provide free samples.
+Although Open data are not necessarily free data, the authors must at least provide free samples, and code to read and export them to freely available computational platforms.
 
 \subsubsection{Free/Libre Open Source Software (FLOSS)}
 
@@ -357,6 +362,15 @@ This analysis belongs to the Discussions section of the manuscript.
 Since the source \LaTeX\ and \BibTeX\ will be available, the authors should be generous with comments.
 Such additional information will not make it to the final published work but can be useful to those readers that will use this material.
 
+\subsubsection{Additional artifacts}
+Current collaborative research usually produces artifacts that may contribute to the replicability of the research.
+Among them, we may mention 
+Mind Maps, 
+Project Management files, 
+Wikis, 
+and a bug tracking database as Bugzilla.
+All these elements, well documented, may be added to the paper repository for optional scrutiny and use.
+
 
 \subsection{Implementation}\label{Sec:Implementation}
 
@@ -366,6 +380,7 @@ IEEE Geoscience and Remote Sensing Letters,
 IEEE Geoscience and Remote Sensing Magazine, and
 IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing.
 This committee will act solely on accepted papers for which the authors have requested the RSRR Badge.
+The role of such committee is solely verifying the reproducibility of the article and, thus, the expertise of their members may be from outside the Remote Sensing community.
 
 The assessment process has three possible outcomes:
 \begin{itemize}
@@ -480,12 +495,17 @@ Trello\footnote{\url{https://trello.com/}} usually meets well the needs of organ
 
 Fig.~\ref{Fig:ScientificCanvas} shows the structure of a Scientific Canvas in Trello, freely available at \url{https://trello.com/b/C747M1GX}.
 Cards are organized in lists, and lists in groups.
+Each group is identified by a color: ``Why?'' in purple,
+``What?'' in yellow,
+``Who?'' in brown,
+``How?'' in green,
+``When and how much?'' in pink.
 This board can be copied and assigned to a team, whose leader can assign tasks (cards), with deadlines, reminders, and several other utilities.
 Details of such an organization, which is inspired by the canvases discussed in Ref.~\cite{osterwalder2010business}, were presented in~\cite{SuccessfulScientificPublishingfromtheProjecttotheAdvertising}.
 
 \begin{figure}[hbt]
 	\centering
-	\includegraphics[width=\linewidth]{ScientificCanvas}
+	\includegraphics[width=\linewidth]{Canvas-Trello-Modelo4}
 	\caption{A Trello implementation of a Scientific Canvas}\label{Fig:ScientificCanvas}
 \end{figure}
 
@@ -559,4 +579,17 @@ He is Professor of Statistics and Data Science with the School of Mathematics an
 His research interests are statistical computing and stochastic modeling.
 \end{IEEEbiography}
 
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{LuisGomez.jpg}}]{Luis Gomez} has Ph.D\ in Telecommunication Engineering in 1992, University of Las Palmas de Gran Canaria, SPAIN) is an Associate Professor since 1994 at the Department of Electronic Engineering and Automatic Control of University of Las Palmas de Gran Canaria. 
+His current research interests include image processing (denoising, segmentation, classification) for remote sensing for SAR (Synthetic Aperture Radar) and PolSAR (Polarimetric Synthetic Aperture Radar) data. 
+He is currently an Associate Editor of the IEEE Geoscience and Remote Sensing Letters, and belongs to the Editorial Board of IPOL (Image Processing on Line, \url{www.ipol.im}). 
+He researches at CTIM (Image Technology Center (\url{www.ctim.es}) and is an IEEE Senior Member.
+\end{IEEEbiography}
+
+\begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{AntonioMedeiros.jpg}}]{Antonio C.\ Medeiros} graduated in Meteorology from the Universidade Federal de Alagoas (2016).
+He is currently enrolled in 
+MBA (Funda\c c\~ao Get\'ulio Vargas, Brazil) and
+MSc (Universidade Federal de Alagoas, Brazil) Programs.
+He is the Project Manager of \textit{Laborat\'orio de Computa\'c\~ao Cient\'ifica e An\'alise Num\'erica -- LaCCAN} of the latter University.
+His research areas are Scientific Project Management, Risk Assessment, and Optimal Resource Allocation.
+\end{IEEEbiography}
 \end{document}
