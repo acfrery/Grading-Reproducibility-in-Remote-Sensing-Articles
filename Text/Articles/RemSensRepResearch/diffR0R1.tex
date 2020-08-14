@@ -1,7 +1,7 @@
 \documentclass[journal,twoside]{IEEEtran}
 %DIF LATEXDIFF DIFFERENCE FILE
 %DIF DEL GradingReproducibilityRS_R0.tex   Fri May  1 14:13:55 2020
-%DIF ADD GradingReproducibilityRS_R1.tex   Thu Aug 13 12:12:03 2020
+%DIF ADD GradingReproducibilityRS_R1.tex   Fri Aug 14 09:06:44 2020
 
 \usepackage{texnames}
 \usepackage{graphicx}
@@ -138,9 +138,9 @@
 	In this paper, we discuss two concepts: reproducibility and replicability in the context of Remote Sensing research. 
 	%
 	We propose a badging system suited to the specifics of the Remote Sensing community.
-	Such a system aims at both recognizing the level of the reproducibility of the research, and to help increase its visibility. 
+	Such a system aims at both recognizing the level of the reproducibility of the research, and to help increase its visibility.
 	%
-	We show examples of reproducible research and provide clues to make easier the transition to the inevitable new times that embrace contemporary Science and technology. 
+	We show examples of reproducible research and provide clues to make easier the transition to the inevitable new times that embrace contemporary Science and \DIFdelbegin \DIFdel{technology}\DIFdelend \DIFaddbegin \DIFadd{Technology}\DIFaddend . 
 	%
 	%It is our desire to \textit{seduce} Authors to include those resources in their common scientific activity.
 \end{abstract}
@@ -164,7 +164,7 @@ New grounds for Reproducible Research were set before the widespread use of deep
 
 Reproducible research has many benefits but also many challenges, and the ones related to software are of utmost importance.
 
-Most remote sensing papers support the evidence of the proposed research by computational codes of medium or high complexity. 
+Most \DIFdelbegin \DIFdel{remote sensing }\DIFdelend \DIFaddbegin \DIFadd{Remote Sensing }\DIFaddend papers support the evidence of the proposed research by computational codes of medium or high complexity. 
 More often than not, while not bearing in mind the reproducibility of the research done, codes are developed under the philosophy of ``getting just results for the paper,'' and then, they will rest in hard drives. 
 It is frequent that, even the ones that implemented the codes can not execute them after some time has passed.  
 
@@ -216,7 +216,7 @@ In this line, we propose a badging system that recognizes works that, fully or p
 The remainder of the paper analyses a journal, a scientific society, and a platform that, implicitly or explicitly, use badging systems (Section~\ref{Sec:BadgingSystems}).
 Section~\ref{Sec:IEEEPlatforms} assesses three platforms available through IEEE that promote reproducibility, but not the point of leading to Remote Sensing fully reproducible research.
 Then, in Section~\ref{Sec:Proposal}, we propose a badging system that, although instantiated for the IEEE Geoscience and Remote Sensing journals, could be applied to other venues.
-Section~\ref{Sec:Tools} briefly describe tools that may support this initiative from the researchers' side.
+Section~\ref{Sec:Tools} briefly \DIFdelbegin \DIFdel{describe }\DIFdelend \DIFaddbegin \DIFadd{describes }\DIFaddend tools that may support this initiative from the researchers' side.
 Section~\ref{Sec:Challenges} comments three of the major challenges this initiative may face.
 
 \section{Badging Systems}\label{Sec:BadgingSystems}
@@ -241,29 +241,39 @@ According to Munaf\`o et al.~\cite{ManifestoReproducibleScience}, this practice 
 
 \begin{figure}[hbt]
 	\centering
-	\subcaptionbox{Open Data}{\includegraphics[width=.2\columnwidth]{OpenData}}
-	\subcaptionbox{Open Materials}{\includegraphics[width=.2\columnwidth]{OpenMaterials}}
-	\subcaptionbox{Preregistered}{\includegraphics[width=.2\columnwidth]{Preregistered}}
-	\caption{Open Science three-level badging system}\label{Fig:OpenScienceBadges}
+	\DIFdelbeginFL %DIFDELCMD < \subcaptionbox{Open Data}{\includegraphics[width=.2\columnwidth]{OpenData}}
+%DIFDELCMD < 	\subcaptionbox{Open Materials}{\includegraphics[width=.2\columnwidth]{OpenMaterials}}
+%DIFDELCMD < 	\subcaptionbox{Preregistered}{\includegraphics[width=.2\columnwidth]{Preregistered}}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \DIFaddbeginFL \subcaptionbox{Open Data.}{\includegraphics[width=.2\columnwidth]{OpenData}}
+	\subcaptionbox{Open Materials.}{\includegraphics[width=.2\columnwidth]{OpenMaterials}}
+	\subcaptionbox{Preregistered.}{\includegraphics[width=.2\columnwidth]{Preregistered}}
+	\DIFaddendFL \caption{Open Science three-level badging system\DIFaddbeginFL \DIFaddFL{.}\DIFaddendFL }\label{Fig:OpenScienceBadges}
 \end{figure}
 
 ACM -- The Association for Computing Machinery has a five-level badging system\footnote{ \url{https://www.acm.org/publications/policies/artifact-review-badging}}, illustrated in Fig.~\ref{fig:ACM-Badging}.
 
 \begin{figure}[hbt]
 	\centering
-	\subcaptionbox{Functional artifacts\label{Fig:Functional}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_functional}}
-	\subcaptionbox{Reusable artifacts\label{Fig:Reusable}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_reusable}}
-	\subcaptionbox{Available artifacts\label{Fig:Available}}{\includegraphics[width=.19\columnwidth]{artifacts_available}}
-	\subcaptionbox{Reproducible results\label{Fig:Reproducible}}{\includegraphics[width=.19\columnwidth]{results_reproduced}}
-	\subcaptionbox{Replicable results\label{Fig:Replicable}}{\includegraphics[width=.19\columnwidth]{results_replicated}}
-	\caption{ACM five-level badging system}\label{fig:ACM-Badging}
+	\DIFdelbeginFL %DIFDELCMD < \subcaptionbox{Functional artifacts\label{Fig:Functional}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_functional}}
+%DIFDELCMD < 	\subcaptionbox{Reusable artifacts\label{Fig:Reusable}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_reusable}}
+%DIFDELCMD < 	\subcaptionbox{Available artifacts\label{Fig:Available}}{\includegraphics[width=.19\columnwidth]{artifacts_available}}
+%DIFDELCMD < 	\subcaptionbox{Reproducible results\label{Fig:Reproducible}}{\includegraphics[width=.19\columnwidth]{results_reproduced}}
+%DIFDELCMD < 	\subcaptionbox{Replicable results\label{Fig:Replicable}}{\includegraphics[width=.19\columnwidth]{results_replicated}}
+%DIFDELCMD < 	%%%
+\DIFdelendFL \DIFaddbeginFL \subcaptionbox{Functional artifacts.\label{Fig:Functional}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_functional}}
+	\subcaptionbox{Reusable artifacts.\label{Fig:Reusable}}{\includegraphics[width=.19\columnwidth]{artifacts_evaluated_reusable}}
+	\subcaptionbox{Available artifacts.\label{Fig:Available}}{\includegraphics[width=.19\columnwidth]{artifacts_available}}
+	\subcaptionbox{Reproducible results.\label{Fig:Reproducible}}{\includegraphics[width=.19\columnwidth]{results_reproduced}}
+	\subcaptionbox{Replicable results.\label{Fig:Replicable}}{\includegraphics[width=.19\columnwidth]{results_replicated}}
+	\DIFaddendFL \caption{ACM five-level badging system\DIFaddbeginFL \DIFaddFL{.}\DIFaddendFL }\label{fig:ACM-Badging}
 \end{figure}
 
 It is worth noting that levels~\ref{Fig:Functional} and~\ref{Fig:Reusable} do not grant \textit{per se} reproducibility.
 They just acknowledge that the authors made their code available to reviewers and that it is functional and reusable.
-The remote sensing community should strive to attain, at least, level~\ref{Fig:Reproducible}.
+The \DIFdelbegin \DIFdel{remote sensing }\DIFdelend \DIFaddbegin \DIFadd{Remote Sensing }\DIFaddend community should strive to attain, at least, level~\ref{Fig:Reproducible}.
 
-We believe that a similar, even if more straightforward, badging system will have a great positive impact in the remote sensing community.
+We believe that a similar, even if more straightforward, badging system will have a great positive impact in the \DIFdelbegin \DIFdel{remote sensing }\DIFdelend \DIFaddbegin \DIFadd{Remote Sensing }\DIFaddend community.
 
 \section{Platforms}\label{Sec:IEEEPlatforms}
 
@@ -307,7 +317,7 @@ IEEE describes DataPort™ as\footnote{\url{https://ieee-dataport.org/about-ieee
 	IEEE DataPort™ is a universally accessible web-based portal that serves four primary purposes: 
 	(1)~Enable individuals and institutions to indefinitely store and make datasets easily accessible to a broad set of researchers, engineers and industry;  
 	(2)~Enable researchers, engineers and industry to gain access to datasets that can be analyzed to advance technology;
-	(3)~Facilitate data analysis by enabling access to data in the AWS Cloud and by enabling the downloading of datasets
+	(3)~Facilitate data analysis by enabling access to data in the AWS\DIFaddbegin \footnote{\DIFadd{Amazon Web Services}} \DIFaddend Cloud and by enabling the downloading of datasets
 	(4)~Supports reproducible research.
 \end{quote}
 
@@ -340,7 +350,7 @@ This workflow is a functional and updated mapping of the ``Compendium'' schema p
 \subsection{Requirements}\label{Sec:Requirements}
 
 \subsubsection{Web page}\label{Sec:WebPage}
-The first requisite for being considered a RSRR is associating the manuscript to a universally accessible and informative web page containing:
+The first requisite for being considered a \DIFdelbegin \DIFdel{RSRR }\DIFdelend \DIFaddbegin \DIFadd{Remote Sensing Reproducible Research (RSRR) paper }\DIFaddend is associating the manuscript to a universally accessible and informative web page containing:
 \begin{enumerate}
 	\item\label{item:ProjectID} Project identification (one project may host more than one paper; one paper may be hosted by more than one project)
 	\begin{enumerate}
@@ -394,7 +404,7 @@ The research course may change along with the work, but telling the whole story 
 \subsubsection{Open data} Open data can be accessed, used, and shared by Governments, businesses, and individuals. 
 Open data should be stored in widely accessible and persistent repositories, in standard, machine-readable formats.
 Please notice that Excel\textsuperscript{\textcopyright}\ spreadsheets do not comply with this requirement; use Comma-Separated Values (with \verb|.csv| extension) instead.
-Although Open data are not necessarily free data, the authors must at least provide free samples\DIFaddbegin \DIFadd{, and code to read and export them to freely available computational platforms}\DIFaddend .
+Although Open data are not necessarily free data, the authors must at least provide \DIFdelbegin \DIFdel{free samples}\DIFdelend \DIFaddbegin \DIFadd{a minimum of free samples, and the tools to read and export them to freely available computational platforms}\DIFaddend .
 
 \subsubsection{Free/Libre Open Source Software (FLOSS)}
 
@@ -405,8 +415,9 @@ R\footnote{\url{https://www.r-project.org/about.html}} (for statistical computin
 Python\footnote{\url{https://www.python.org/about/}} (an interpreted, object-oriented, high-level programming language with dynamic semantics),
 GNU Octave\footnote{\url{https://booki.flossmanuals.net/command-line/gnu-octave.html#}} (an array-programming oriented language).
 The European Space Agency -- ESA freely distributes SNAP -- SeNtinel’s Application Platform\footnote{\url{http://step.esa.int/main/toolboxes/snap/}}.
-Developed in Java and Python.
-SNAP is intended for interactive image visualization and analysis, but it also allows scripting and software and extension with new functionalities.
+\DIFdelbegin \DIFdel{Developed }\DIFdelend \DIFaddbegin \DIFadd{SNAP, developed }\DIFaddend in Java and Python\DIFdelbegin \DIFdel{.
+SNAP }\DIFdelend \DIFaddbegin \DIFadd{,
+}\DIFaddend is intended for interactive image visualization and analysis, but it also allows scripting and software \DIFdelbegin \DIFdel{and }\DIFdelend extension with new functionalities.
 Moreover, ESA promotes STEP, a community platform for accessing the software and its documentation, communicating with the developers, dialoguing within the science community, promoting results and achievements as well as providing tutorials and material for training scientists using the Toolboxes.
 All platforms mentioned in this section have similar communities.
 
@@ -431,7 +442,7 @@ Therefore, the implementation must be designed aiming at its easy and fast adapt
 This is especially true for the challenges that the deep learning paradigm brings into Remote Sensing research.
 
 We urge authors to adhere to good practices as, for instance, those discussed in~Ref.~\cite[Chapter 7]{WritingScientificSoftware}.
-Bear in mind that sharing code aims at allowing others to use it, so you must provide running examples, and comments that allow your readers to make the necessary changes for, for instance, changing the input data.
+Bear in mind that sharing code aims at allowing others to use it, so you must provide running examples, and comments that allow your readers to make the necessary changes\DIFdelbegin \DIFdel{for, for instance, changing }\DIFdelend \DIFaddbegin \DIFadd{, for example on how to change }\DIFaddend the input data.
 
 For instance, for C, Java, Python programmers, the  GNU General Public License tool, Doxygen\footnote{\url{http://doxygen.nl}}, easily generates documentation from flat sources and it also provides visual representations of the code in a hierarchical attractive and very useful way.
 
@@ -474,7 +485,7 @@ IEEE Geoscience and Remote Sensing Letters,
 IEEE Geoscience and Remote Sensing Magazine, and
 IEEE Journal of Selected Topics on Applied Earth Observations and Remote Sensing.
 This committee will act solely on accepted papers for which the authors have requested the RSRR Badge.
-\DIFaddbegin \DIFadd{The role of such committee is solely verifying the reproducibility of the article and, thus, the expertise of their members may be from outside the Remote Sensing community.
+\DIFaddbegin \DIFadd{The role of such committee is solely verifying the reproducibility of the article and, thus, the expertise of their members might also be from outside the Remote Sensing community.
 }\DIFaddend 
 
 The assessment process has three possible outcomes:
@@ -489,7 +500,7 @@ Fig.~\ref{Fig:BadgeProcess} illustrates the proposed badge awarding process.
 \begin{figure}[hbt]
 	\centering
 	\includegraphics[width=.7\columnwidth]{BadgeAwardingProcess}
-	\caption{Flowchart of the badge awarding process}\label{Fig:BadgeProcess}
+	\caption{Flowchart of the badge awarding process\DIFaddbeginFL \DIFaddFL{.}\DIFaddendFL }\label{Fig:BadgeProcess}
 	%%% The source for this figure is in /Figures/DrawIO/BadgeAwardingProcess.drawio
 \end{figure}
 
@@ -508,7 +519,7 @@ As authors' obligation, a pre-requisite to obtaining the badge is the acknowledg
 
 Starting well saves lots of time.
 We make recommendations that may save time and effort.
-All of them are either free or offer a free operational version, which usually suits the needs of relatively small remote sensing reproducible research projects.
+All of them are either free or offer a free operational version, which usually suits the needs of relatively small \DIFdelbegin \DIFdel{remote sensing }\DIFdelend \DIFaddbegin \DIFadd{Remote Sensing }\DIFaddend reproducible research projects.
 
 \subsection{Doodling}
 
@@ -603,7 +614,7 @@ Details of such an organization, which is inspired by the canvases discussed in 
 	\DIFdelbeginFL %DIFDELCMD < \includegraphics[width=\linewidth]{ScientificCanvas}
 %DIFDELCMD < 	%%%
 \DIFdelendFL \DIFaddbeginFL \includegraphics[width=\linewidth]{Canvas-Trello-Modelo4}
-	\DIFaddendFL \caption{A Trello implementation of a Scientific Canvas}\label{Fig:ScientificCanvas}
+	\DIFaddendFL \caption{A Trello implementation of a Scientific Canvas\DIFaddbeginFL \DIFaddFL{.}\DIFaddendFL }\label{Fig:ScientificCanvas}
 \end{figure}
 
 As Trello keeps track of every single modification, it becomes a useful resource when it comes to reproducibility.
@@ -620,8 +631,13 @@ For this reason, it is advisable to prefer software that allows coding.
 \subsection{Machine Learning}
 
 Machine learning in general, and CNNs -- Convolutional Neural Networks in particular, have seen an extraordinary increase in popularity in the Remote Sensing community~\cite{DeepLearningandProcessUnderstandingforDataDrivenEarthSystemScience} lately. 
-Any reproducible approach must pay special attention to what this so efficient machine learning approach is capable of getting from data (especially from the Big Data).
-Isdahl and Gundersen~\cite{OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms}
+Any reproducible approach must pay special attention to what this so efficient machine learning approach is capable of getting from data (especially from \DIFdelbegin \DIFdel{the }\DIFdelend Big Data)\DIFdelbegin \DIFdel{.
+Isdahl and Gundersen~\mbox{%DIFAUXCMD
+\cite{OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms}}\hspace{0pt}%DIFAUXCMD
+}\DIFdelend \DIFaddbegin \DIFadd{~\mbox{%DIFAUXCMD
+\cite{OutoftheBoxReproducibilityaSurveyofMachineLearningPlatforms}}\hspace{0pt}%DIFAUXCMD
+.
+}\DIFaddend 
 
 Some of the challenges that these studies pose for their reproducibility are random initialization and the need for GPU resources. 
 
@@ -679,7 +695,7 @@ His research interests are statistical computing and stochastic modeling.
 }\end{IEEEbiography}
 
 \begin{IEEEbiography}[{\includegraphics[width=1in,height=1.25in,clip,keepaspectratio]{LuisGomez.jpg}}]{Luis Gomez} \DIFadd{has Ph.D\ in Telecommunication Engineering in 1992, University of Las Palmas de Gran Canaria, SPAIN) is an Associate Professor since 1994 at the Department of Electronic Engineering and Automatic Control of University of Las Palmas de Gran Canaria. 
-His current research interests include image processing (denoising, segmentation, classification) for remote sensing for SAR (Synthetic Aperture Radar) and PolSAR (Polarimetric Synthetic Aperture Radar) data. 
+His current research interests include image processing (denoising, segmentation, classification) for Remote Sensing for SAR (Synthetic Aperture Radar) and PolSAR (Polarimetric Synthetic Aperture Radar) data. 
 He is currently an Associate Editor of the IEEE Geoscience and Remote Sensing Letters, and belongs to the Editorial Board of IPOL (Image Processing on Line, }\url{www.ipol.im}\DIFadd{). 
 He researches at CTIM (Image Technology Center (}\url{www.ctim.es}\DIFadd{) and is an IEEE Senior Member.
 }\end{IEEEbiography}
