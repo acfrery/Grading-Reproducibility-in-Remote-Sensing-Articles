@@ -1,5 +1,5 @@
 # Badging System for Reproducibility and Replicability in Remote Sensing Research
-## Authors: Alejandro C. Frery<span id="a2">[*](#1)</span>, Luis Gomez<span id="a2">[**](#1)</span>, Antonio C. Medeiros<span id="a3">[***](#1)</span>
+## Authors: Alejandro C. Frery<span id="a1">[*](#1)</span>, Luis Gomez<span id="a2">[**](#1)</span>, Antonio C. Medeiros<span id="a3">[***](#1)</span>
 ### First submitted version: 30 April 2020
 ### First revised version: 14 August 2020
 
@@ -18,9 +18,11 @@ The directory structure is the following:
 │   ├── DrawIO
 │   ├── FreeMind
 │   ├── PDF
+│   ├── PNG
 │   └── tikz
 ├── Images
 │   └── PNG
+│   └── JPG
 ├── Outputs
 │   ├── Results
 │   └── Tests
