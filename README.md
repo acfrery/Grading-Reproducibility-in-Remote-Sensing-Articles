@@ -1,6 +1,6 @@
 # Badging System for Reproducibility and Replicability in Remote Sensing Research
 ## Authors: Alejandro C. Frery<span id="a1">[*](#1)</span>, Luis Gomez<span id="a2">[**](#1)</span>, Antonio C. Medeiros<span id="a3">[***](#1)</span>
-### [First submitted version: 30 April 2020](./Text/Articles/RemSensRepResearch/GradingReproducibilityRS_R1.pdf)
+### [First submitted version: 30 April 2020](./Text/Articles/RemSensRepResearch/GradingReproducibilityRS_R0.pdf)
 ### [First revised version: 14 August 2020](./Text/Articles/RemSensRepResearch/GradingReproducibilityRS_R1.pdf)
 
 Position Paper for the J-STARS Special Issue on Reproducible Research in Remote Sensing
